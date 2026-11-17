@@ -1,0 +1,10 @@
+[project]
+name = "dsci-522-palmer-penguin-analysis"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "altair>=6.3.0",
+    "ipykernel>=7.4.0",
+    "jupyter>=1.1.1",
+    "pandas>=3.1.1",
+]
