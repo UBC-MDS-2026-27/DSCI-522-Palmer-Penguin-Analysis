@@ -1,6 +1,6 @@
 ---
 title: "Penguin Species Classification"
-author: "Yuxue Zhu"
+author: "Yuxue Zhu, Maxine Paredes, Abhishek Sharma, Hephzibah Adeniji"
 date: "2026/11/19"
 jupyter: python3
 ---
