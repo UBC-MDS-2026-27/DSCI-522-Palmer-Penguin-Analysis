@@ -7,6 +7,7 @@ jupyter: python3
 # Summary
 
 # Introduction
+The Palmer Penguins dataset (Horst et al., ...) contains data collected from three species of *Pygoscelis* penguins that live in Antartica's Palmer Archipelago from 2007 to 2009.
 
 # Methods
 
