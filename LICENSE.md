@@ -2,8 +2,6 @@
 
 This project is dual-licensed: the software and source code are licensed under the MIT License, and the data analysis report and written documentation are licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license.
 
----
-
 ## Software License: MIT License
 
 Copyright (c) 2026 Abhishek Sharma, Jade Zhu, Maxine Paredes, Hephzibah Adeniji
