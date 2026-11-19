@@ -9,6 +9,45 @@ jupyter: python3
 # Introduction
 
 # Methods
+## Data Collection
+
+We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).
+
+We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.
+
+```{python}
+from pathlib import Path
+import pandas as pd
+
+# Create data directories
+raw_dir = Path("../data/raw")
+processed_dir = Path("../data/processed")
+
+raw_dir.mkdir(parents=True, exist_ok=True)
+processed_dir.mkdir(parents=True, exist_ok=True)
+
+# Download the original dataset
+url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv"
+raw_data = pd.read_csv(url)
+
+# Save the original dataset
+raw_data.to_csv(raw_dir / "penguins.csv", index=False)
+
+# Select relevant variables and remove missing values
+data = raw_data[
+    ["species", "flipper_length_mm", "body_mass_g"]
+].dropna()
+
+# Save processed data
+data.to_csv(processed_dir / "penguins_cleaned.csv", index=False)
+```
+
+
+## Exploratory Data Analysis
+
+## Model Training
+
+## Mondel Evaluation
 
 # Result
 
