@@ -1,0 +1,18 @@
+---
+title: "Penguin Species Classification"
+author: "Yuxue Zhu"
+date: "2026/11/19"
+jupyter: python3
+---
+# Summary
+
+# Introduction
+
+# Methods
+
+# Result
+
+# Discussion
+
+# References
+

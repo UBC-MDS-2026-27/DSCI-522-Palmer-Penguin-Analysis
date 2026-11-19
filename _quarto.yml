@@ -1,0 +1,7 @@
+project:
+  title: "Penguin Species Classification"
+  render:
+    - analysis/*.qmd
+
+
+
