@@ -14,10 +14,11 @@ import altair as alt
 # Summary
 
 # Introduction
-The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a
-study of differences between male and female penguins (Gorman et al., 2014).
 
-Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin's sex. Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.
+## Background
+The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.
+
+Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin's sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle. 
 
 # Methods
 ## Data Collection
