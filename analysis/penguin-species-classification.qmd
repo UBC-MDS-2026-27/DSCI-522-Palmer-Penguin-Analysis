@@ -7,7 +7,8 @@ jupyter: python3
 # Summary
 
 # Introduction
-The Palmer Penguins dataset (Horst et al., 2020) contains data orignally collected by Dr. Kristen Gorman and the Palmer Station Antarctica LTER from three species of *Pygoscelis* penguins that live in Antarctica's Palmer Archipelago region. It has become a popular alternative to Anderson's Iris dataset (1936) in particularly statistics and machine learning education due to its practical ecological context and more realistic structure, including missing values, unbalanced classes, and a combination of numeric and categorical variables.
+The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a
+study of differences between male and female penguins (Gorman et al., 2014).
 
 # Methods
 
