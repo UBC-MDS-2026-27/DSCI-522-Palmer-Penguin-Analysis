@@ -13,6 +13,7 @@ import altair as alt
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 ```
 # Summary
 
@@ -154,7 +155,29 @@ mass_model = make_pipeline(
 mass_model.fit(X_train_mass, y_train)
 ```
 ## Mondel Evaluation
+We evaluated both models using accuracy and macro-averaged F1-score on the test set. 
+Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.
 
+The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.
+
+We also used confusion matrices to examine which species were correctly classified and which were misclassified.
+
+```{python}
+
+# Generate predictions
+flipper_predictions = flipper_model.predict(X_test_flipper)
+mass_predictions = mass_model.predict(X_test_mass)
+
+# Compare model performance
+results = pd.DataFrame({
+    "Model": ["Flipper Length", "Body Mass"],
+    "Accuracy": [
+        accuracy_score(y_test, flipper_predictions),
+        accuracy_score(y_test, mass_predictions)
+    ]
+})
+results
+```
 # Result
 
 # Discussion
