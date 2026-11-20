@@ -175,6 +175,7 @@ mass_model = make_pipeline(
 mass_model.fit(X_train_mass, y_train)
 ```
 ## Model Evaluation
+
 We evaluated both models using accuracy and macro-averaged F1-score on the test set. 
 Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.
 
