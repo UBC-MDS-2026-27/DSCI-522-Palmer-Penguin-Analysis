@@ -13,11 +13,19 @@ import altair as alt
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import ( accuracy_score, precision_score, recall_score, f1_score, confusion_matrix)
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix,
+)
 ```
 # Summary
 
 # Introduction
+
+**Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?**
 
 ## Background
 The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.
@@ -26,6 +34,15 @@ Every breeding season, researchers identified studies nests where pairs of adult
 
 ## Relevance
 Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin's current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.
+
+## Data Description
+We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
+
+- `species`: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.
+- `flipper_length_mm`: flipper length, in millimetres.
+- `body_mass_g`: body mass, in grams.
+
+Two penguins have no flipper length or body mass recorded, so we remove them before analysis. The remaining variables are not used.
 
 # Methods
 ## Data Collection
@@ -157,8 +174,13 @@ mass_model = make_pipeline(
 
 mass_model.fit(X_train_mass, y_train)
 ```
-
 ## Model Evaluation
+We evaluated both models using accuracy and macro-averaged F1-score on the test set. 
+Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.
+
+The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.
+
+We also used confusion matrices to examine which species were correctly classified and which were misclassified.
 
 # Results
 
@@ -168,7 +190,7 @@ recall, and F1-score for each single-predictor model.
 
 ```{python}
 
-# Generate test-set predictions using Jade's fitted pipelines
+# Generate test-set predictions using the fitted pipelines
 y_pred_flipper = flipper_model.predict(X_test_flipper)
 y_pred_mass = mass_model.predict(X_test_mass)
 

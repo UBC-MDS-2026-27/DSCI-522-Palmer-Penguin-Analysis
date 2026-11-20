@@ -2372,6 +2372,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
   <li><a href="#relevance" id="toc-relevance" class="nav-link" data-scroll-target="#relevance">Relevance</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
@@ -2420,20 +2421,28 @@ window.Quarto = {
 </header>
 
 
-<div id="9bec1edc" class="cell" data-execution_count="1">
+<div id="4e337d0c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    accuracy_score,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    precision_score,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    recall_score,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    f1_score,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    confusion_matrix,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="summary" class="level1">
 <h1>Summary</h1>
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
+<p><strong>Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?</strong></p>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus <em>Pygoscelis</em>) nesting on three islands in Antarctica’s Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.</p>
@@ -2443,6 +2452,16 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="relevance">Relevance</h2>
 <p>Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin’s current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.</p>
 </section>
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
+<p>We use the <code>penguins</code> data set from the <code>palmerpenguins</code> package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:</p>
+<ul>
+<li><code>species</code>: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.</li>
+<li><code>flipper_length_mm</code>: flipper length, in millimetres.</li>
+<li><code>body_mass_g</code>: body mass, in grams.</li>
+</ul>
+<p>Two penguins have no flipper length or body mass recorded, so we remove them before analysis. The remaining variables are not used.</p>
+</section>
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
@@ -2450,7 +2469,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).</p>
 <p>We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.</p>
-<div id="dc95e378" class="cell" data-execution_count="2">
+<div id="82c3781b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data directories</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> Path(<span class="st">&quot;../data/raw&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> Path(<span class="st">&quot;../data/processed&quot;</span>)</span>
@@ -2477,7 +2496,7 @@ window.Quarto = {
 <section id="traing-test-splitting" class="level2">
 <h2 class="anchored" data-anchor-id="traing-test-splitting">Traing-Test Splitting</h2>
 <p>We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.</p>
-<div id="345b43a6" class="cell" data-execution_count="3">
+<div id="2c4c5f8c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    data,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
@@ -2499,7 +2518,7 @@ window.Quarto = {
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>We explored the training data to understand how flipper length and body mass vary across the three penguin species. We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.</p>
-<div id="113561a7" class="cell" data-execution_count="4">
+<div id="a88fee49" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> train_data.groupby(<span class="st">&quot;species&quot;</span>)[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>]</span>
@@ -2586,22 +2605,22 @@ window.Quarto = {
 <div aria-describedby="fig-penguin-flipper-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-843db18e128740cea804a05193734e37.vega-embed {
+#altair-viz-3a924bb6192b44a69214d0e79d6b6266.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-843db18e128740cea804a05193734e37.vega-embed details,
-#altair-viz-843db18e128740cea804a05193734e37.vega-embed details summary {
+#altair-viz-3a924bb6192b44a69214d0e79d6b6266.vega-embed details,
+#altair-viz-3a924bb6192b44a69214d0e79d6b6266.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-843db18e128740cea804a05193734e37"></div>
+<div id="altair-viz-3a924bb6192b44a69214d0e79d6b6266"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-843db18e128740cea804a05193734e37") {
-      outputDiv = document.getElementById("altair-viz-843db18e128740cea804a05193734e37");
+    if (outputDiv.id !== "altair-viz-3a924bb6192b44a69214d0e79d6b6266") {
+      outputDiv = document.getElementById("altair-viz-3a924bb6192b44a69214d0e79d6b6266");
     }
 
     const paths = {
@@ -2673,22 +2692,22 @@ Figure 1: Flipper Length of penguins by species.
 <div aria-describedby="fig-penguin-body-mass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-3cf597a84ca641f782a9f1c23e549855.vega-embed {
+#altair-viz-7f790cd3213f4aa2b895efbd5904d368.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-3cf597a84ca641f782a9f1c23e549855.vega-embed details,
-#altair-viz-3cf597a84ca641f782a9f1c23e549855.vega-embed details summary {
+#altair-viz-7f790cd3213f4aa2b895efbd5904d368.vega-embed details,
+#altair-viz-7f790cd3213f4aa2b895efbd5904d368.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-3cf597a84ca641f782a9f1c23e549855"></div>
+<div id="altair-viz-7f790cd3213f4aa2b895efbd5904d368"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3cf597a84ca641f782a9f1c23e549855") {
-      outputDiv = document.getElementById("altair-viz-3cf597a84ca641f782a9f1c23e549855");
+    if (outputDiv.id !== "altair-viz-7f790cd3213f4aa2b895efbd5904d368") {
+      outputDiv = document.getElementById("altair-viz-7f790cd3213f4aa2b895efbd5904d368");
     }
 
     const paths = {
@@ -2754,7 +2773,7 @@ Logistic regression is a classification method that estimates the probability of
 <p>Flipper length model: uses flipper length as the only predictor.</p>
 <p>Body mass model: uses body mass as the only predictor.</p>
 <p>Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.</p>
-<div id="c3362ea4" class="cell" data-execution_count="7">
+<div id="53beaecc" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 1: Flipper length</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flipper_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -4215,7 +4234,7 @@ function forceTheme(elementId) {
 forceTheme('sk-container-id-1');</script>
 </div>
 </div>
-<div id="22e28ff7" class="cell" data-execution_count="8">
+<div id="103625f8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Body mass</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mass_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -5679,79 +5698,74 @@ forceTheme('sk-container-id-2');</script>
 </section>
 <section id="model-evaluation" class="level2">
 <h2 class="anchored" data-anchor-id="model-evaluation">Model Evaluation</h2>
+<p>We evaluated both models using accuracy and macro-averaged F1-score on the test set. Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.</p>
+<p>The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.</p>
+<p>We also used confusion matrices to examine which species were correctly classified and which were misclassified.</p>
 </section>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
 <p>To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were evaluated on the held-out test set (<span class="math inline">\(n = 86\)</span>). Table 1 compares the overall test accuracy alongside macro averaged precision, recall, and F1-score for each single-predictor model.</p>
-<div id="696bd61a" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    accuracy_score,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    precision_score,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    recall_score,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    f1_score,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    confusion_matrix,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate test-set predictions using Jade&#39;s fitted pipelines</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>y_pred_flipper <span class="op">=</span> flipper_model.predict(X_test_flipper)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>y_pred_mass <span class="op">=</span> mass_model.predict(X_test_mass)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Build clean summary comparison table</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>results_table <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Predictor&quot;</span>: [<span class="st">&quot;Flipper Length&quot;</span>, <span class="st">&quot;Body Mass&quot;</span>],</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: [</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(accuracy_score(y_test, y_pred_flipper), <span class="dv">3</span>),</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(accuracy_score(y_test, y_pred_mass), <span class="dv">3</span>),</span>
+<div id="bf0e1d2f" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate test-set predictions using the fitted pipelines</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y_pred_flipper <span class="op">=</span> flipper_model.predict(X_test_flipper)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y_pred_mass <span class="op">=</span> mass_model.predict(X_test_mass)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Build clean summary comparison table</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>results_table <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Predictor&quot;</span>: [<span class="st">&quot;Flipper Length&quot;</span>, <span class="st">&quot;Body Mass&quot;</span>],</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: [</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(accuracy_score(y_test, y_pred_flipper), <span class="dv">3</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(accuracy_score(y_test, y_pred_mass), <span class="dv">3</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: [</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(precision_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(precision_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Recall&quot;</span>: [</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(recall_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(recall_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: [</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(precision_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(precision_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro F1-Score&quot;</span>: [</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(f1_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(f1_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Recall&quot;</span>: [</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(recall_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(recall_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro F1-Score&quot;</span>: [</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(f1_score(y_test, y_pred_flipper, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="bu">round</span>(f1_score(y_test, y_pred_mass, average<span class="op">=</span><span class="st">&quot;macro&quot;</span>, zero_division<span class="op">=</span><span class="dv">0</span>), <span class="dv">3</span>),</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>results_table.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>).<span class="bu">format</span>({</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Recall&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro F1-Score&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>results_table.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>).<span class="bu">format</span>({</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Recall&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro F1-Score&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <style type="text/css">
 </style>
 
-<table id="T_a55d9" class="caption-top table table-sm table-striped small">
+<table id="T_f25b9" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_a55d9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
-<th id="T_a55d9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
-<th id="T_a55d9_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
-<th id="T_a55d9_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
-<th id="T_a55d9_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
+<th id="T_f25b9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
+<th id="T_f25b9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
+<th id="T_f25b9_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
+<th id="T_f25b9_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
+<th id="T_f25b9_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_a55d9_row0_col0" class="data row0 col0">Flipper Length</td>
-<td id="T_a55d9_row0_col1" class="data row0 col1">0.837</td>
-<td id="T_a55d9_row0_col2" class="data row0 col2">0.910</td>
-<td id="T_a55d9_row0_col3" class="data row0 col3">0.725</td>
-<td id="T_a55d9_row0_col4" class="data row0 col4">0.715</td>
+<td id="T_f25b9_row0_col0" class="data row0 col0">Flipper Length</td>
+<td id="T_f25b9_row0_col1" class="data row0 col1">0.837</td>
+<td id="T_f25b9_row0_col2" class="data row0 col2">0.910</td>
+<td id="T_f25b9_row0_col3" class="data row0 col3">0.725</td>
+<td id="T_f25b9_row0_col4" class="data row0 col4">0.715</td>
 </tr>
 <tr class="even">
-<td id="T_a55d9_row1_col0" class="data row1 col0">Body Mass</td>
-<td id="T_a55d9_row1_col1" class="data row1 col1">0.744</td>
-<td id="T_a55d9_row1_col2" class="data row1 col2">0.525</td>
-<td id="T_a55d9_row1_col3" class="data row1 col3">0.617</td>
-<td id="T_a55d9_row1_col4" class="data row1 col4">0.561</td>
+<td id="T_f25b9_row1_col0" class="data row1 col0">Body Mass</td>
+<td id="T_f25b9_row1_col1" class="data row1 col1">0.744</td>
+<td id="T_f25b9_row1_col2" class="data row1 col2">0.525</td>
+<td id="T_f25b9_row1_col3" class="data row1 col3">0.617</td>
+<td id="T_f25b9_row1_col4" class="data row1 col4">0.561</td>
 </tr>
 </tbody>
 </table>
@@ -5759,7 +5773,7 @@ forceTheme('sk-container-id-2');</script>
 </div>
 <p>Table 1. Held-out test set classification performance comparing single-predictor logistic regression models using flipper length versus body mass across overall accuracy and macro averaged precision, recall, and F1-score.</p>
 <p>As shown in Table 1, flipper length outperformed body mass across every evaluation metric. The flipper length classifier achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715, compared to an overall accuracy of 0.744 and a macro-averaged F1-score of 0.561 for the body mass classifier.</p>
-<div id="0a088db7" class="cell" data-execution_count="10">
+<div id="b51fb02d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>species_order <span class="op">=</span> [<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_cm_df(y_true, y_pred, model_label):</span>
@@ -5817,22 +5831,22 @@ forceTheme('sk-container-id-2');</script>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 <style>
-#altair-viz-614472a811144df4a3d26773f67330bb.vega-embed {
+#altair-viz-d4955387518e4e388a13ecbae6a78d28.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-614472a811144df4a3d26773f67330bb.vega-embed details,
-#altair-viz-614472a811144df4a3d26773f67330bb.vega-embed details summary {
+#altair-viz-d4955387518e4e388a13ecbae6a78d28.vega-embed details,
+#altair-viz-d4955387518e4e388a13ecbae6a78d28.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-614472a811144df4a3d26773f67330bb"></div>
+<div id="altair-viz-d4955387518e4e388a13ecbae6a78d28"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-614472a811144df4a3d26773f67330bb") {
-      outputDiv = document.getElementById("altair-viz-614472a811144df4a3d26773f67330bb");
+    if (outputDiv.id !== "altair-viz-d4955387518e4e388a13ecbae6a78d28") {
+      outputDiv = document.getElementById("altair-viz-d4955387518e4e388a13ecbae6a78d28");
     }
 
     const paths = {
