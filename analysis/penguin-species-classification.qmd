@@ -20,6 +20,8 @@ from sklearn.metrics import (
     f1_score,
     confusion_matrix,
 )
+# png, so the charts also show in the PDF
+_ = alt.renderers.enable("png", scale_factor=2)
 ```
 # Summary
 
@@ -125,8 +127,7 @@ flipper_chart = alt.Chart(train_data).mark_boxplot().encode(
 ).properties(
     title="Flipper Length by Penguin Species"
 )
-
-flipper_chart 
+flipper_chart
 ```
 
 ```{python}
