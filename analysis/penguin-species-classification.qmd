@@ -182,12 +182,6 @@ The macro-averaged F1-score considers both precision and recall and calculates t
 
 We also used confusion matrices to examine which species were correctly classified and which were misclassified.
 
-# Results
-
-To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were 
-evaluated on the held-out test set ($n = 86$). Table 1 compares the overall test accuracy alongside macro averaged precision, 
-recall, and F1-score for each single-predictor model.
-
 ```{python}
 
 # Generate test-set predictions using the fitted pipelines
@@ -214,7 +208,15 @@ results_table = pd.DataFrame({
         round(f1_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
     ],
 })
+```
 
+# Results
+
+To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were 
+evaluated on the held-out test set ($n = 86$). Table 1 compares the overall test accuracy alongside macro averaged precision, 
+recall, and F1-score for each single-predictor model.
+
+```{python}
 results_table.style.hide(axis="index").format({
     "Overall Accuracy": "{:.3f}",
     "Macro Precision": "{:.3f}",
