@@ -171,5 +171,34 @@ mass_model.fit(X_train_mass, y_train)
 
 # Discussion
 
+The held-out test set results demonstrate that flipper length is a substantially stronger single predictor of Palmer penguin species than body mass, 
+achieving an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715 compared to 0.744 accuracy and a 0.561 macro-averaged F1-score for body mass.
+ This performance gap aligns with biological differences between structural skeletal traits and labile physiological traits in seabirds. 
+ Once adult penguins reach maturity, flipper length remains relatively stable across the breeding season, providing a consistent morphological 
+ signal across species. By contrast, body mass fluctuates considerably depending on recent foraging success, fasting during incubation, 
+ and parental provisioning duties (Gorman et al., 2014), introducing within species variance that blurs decision boundaries in a single-predictor 
+ logistic regression model.
+
+Examining species-level errors reveals why overall accuracy remained below 0.85 for both single-feature classifiers. 
+Gentoo penguins are noticeably larger in both flipper length and body mass than their congeners in the Palmer Archipelago, 
+allowing both models to identify Gentoo individuals with high reliability. However, Adélie and Chinstrap penguins share very similar 
+body mass distributions, causing the body mass classifier to misclassify nearly all test-set Chinstrap penguins as Adélie. 
+While flipper length separated Adélie and Chinstrap penguins moderately better than body mass, a single linear boundary on one morphological 
+feature cannot fully resolve overlapping measurements between these two smaller species.
+
+Several limitations should be considered when interpreting these findings. First, restricting each logistic regression model to a single predictor 
+ignores complementary morphological traits—such as bill length and bill depth—that strongly distinguish Chinstrap penguins from Adélie penguins.
+ Second, the dataset exhibits class imbalance across species and spans three breeding seasons across different islands in the Palmer Archipelago 
+ (Horst et al., 2020), meaning environmental and inter-annual shifts in prey availability could influence body mass measurements. 
+ Third, adult penguins exhibit sexual dimorphism in body size (Gorman et al., 2014), and pooling males and females without accounting for sex 
+ increases overlap between smaller males of one species and larger females of another.
+
+Future analyses could extend this work in three practical directions. First, fitting a multivariable logistic regression model or regularized 
+classifier that combines flipper length with bill length and bill depth would quantify how much classification accuracy improves when structural 
+bill morphology is included alongside flipper length. Second, incorporating penguin sex and nesting island as covariates or interaction terms could 
+clarify whether accounting for sexual dimorphism resolves the remaining confusion between Adélie and Chinstrap penguins. Finally, evaluating non-linear 
+classifiers such as random forests or support vector machines on the multi-feature dataset could test whether curved decision boundaries capture subtle 
+morphological separation across all three species.
+
 # References
 
