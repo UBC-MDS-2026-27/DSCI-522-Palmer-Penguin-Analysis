@@ -10,8 +10,6 @@ from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import altair as alt
-import vl_convert as vlc
-from IPython.display import Image, display
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -22,6 +20,8 @@ from sklearn.metrics import (
     f1_score,
     confusion_matrix,
 )
+# png, so the charts also show in the PDF
+_ = alt.renderers.enable("png", scale_factor=2)
 ```
 # Summary
 
@@ -127,8 +127,7 @@ flipper_chart = alt.Chart(train_data).mark_boxplot().encode(
 ).properties(
     title="Flipper Length by Penguin Species"
 )
-
-display(Image(data=vlc.vegalite_to_png(flipper_chart.to_dict(), scale=2)))
+flipper_chart
 ```
 
 ```{python}
@@ -142,7 +141,7 @@ mass_chart = alt.Chart(train_data).mark_boxplot().encode(
 ).properties(
     title="Body Mass by Penguin Species"
 )
-display(Image(data=vlc.vegalite_to_png(mass_chart.to_dict(), scale=2)))
+mass_chart
 ```
 
 ## Model Training
