@@ -10,6 +10,9 @@ from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import altair as alt
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
 ```
 # Summary
 
@@ -120,7 +123,36 @@ mass_chart
 ```
 
 ## Model Training
+We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with  
+Logistic regression is a classification method that estimates the probability of an observation belonging to each class.
 
+To compare the predictive ability of the two measurements, we developed two separate models:
+
+Flipper length model: uses flipper length as the only predictor.
+
+Body mass model: uses body mass as the only predictor.
+
+Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.
+
+
+```{python}
+# Model 1: Flipper length
+flipper_model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1000)
+)
+
+flipper_model.fit(X_train_flipper, y_train)
+```
+```{python}
+# Model 2: Body mass
+mass_model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1000)
+)
+
+mass_model.fit(X_train_mass, y_train)
+```
 ## Mondel Evaluation
 
 # Result
