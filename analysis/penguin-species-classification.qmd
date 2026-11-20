@@ -26,6 +26,15 @@ Every breeding season, researchers identified studies nests where pairs of adult
 ## Relevance
 Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin's current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.
 
+## Data Description
+We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
+
+- `species`: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.
+- `flipper_length_mm`: flipper length, in millimetres.
+- `body_mass_g`: body mass, in grams.
+
+Two penguins have no flipper length or body mass recorded, so we remove them before analysis. The remaining variables are not used.
+
 # Methods
 ## Data Collection
 
