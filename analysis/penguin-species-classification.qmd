@@ -4,6 +4,13 @@ author: "Yuxue Zhu, Maxine Paredes, Abhishek Sharma, Hephzibah Adeniji"
 date: "2026/11/19"
 jupyter: python3
 ---
+
+```{python}
+from pathlib import Path
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import altair as alt
+```
 # Summary
 
 # Introduction
@@ -21,9 +28,6 @@ We used the Palmer Penguins dataset, which contains measurements and species inf
 We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.
 
 ```{python}
-from pathlib import Path
-import pandas as pd
-
 # Create data directories
 raw_dir = Path("../data/raw")
 processed_dir = Path("../data/processed")
@@ -47,8 +51,73 @@ data = raw_data[
 data.to_csv(processed_dir / "penguins_cleaned.csv", index=False)
 ```
 
+## Traing-Test Splitting
+We divided the cleaned dataset into training and testing sets using a 75:25 ratio. 
+We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.
+
+```{python}
+
+train_data, test_data = train_test_split(
+    data,
+    test_size=0.25,
+    random_state=123,
+    stratify=data["species"]
+)
+
+# Separate response variable and predictors
+y_train = train_data["species"]
+y_test = test_data["species"]
+
+X_train_flipper = train_data[["flipper_length_mm"]]
+X_test_flipper = test_data[["flipper_length_mm"]]
+
+X_train_mass = train_data[["body_mass_g"]]
+X_test_mass = test_data[["body_mass_g"]]
+```
 
 ## Exploratory Data Analysis
+
+We explored the training data to understand how flipper length and body mass vary across the three penguin species. 
+We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.
+
+```{python}
+# Descriptive statistics
+summary_stats = train_data.groupby("species")[
+    ["flipper_length_mm", "body_mass_g"]
+].agg(["count", "mean", "std"])
+summary_stats
+```
+
+```{python}
+#| label: fig-penguin-flipper-length
+#| fig-cap: "Flipper Length of penguins by species."
+
+# Visualize measurements by species
+# Flipper length by species
+flipper_chart = alt.Chart(train_data).mark_boxplot().encode(
+    y=alt.Y("species:N", title="Penguin Species"),
+    x=alt.X("flipper_length_mm:Q", title="Flipper Length (mm)"),
+    color=alt.Color("species:N", title="Species")
+).properties(
+    title="Flipper Length by Penguin Species"
+)
+
+flipper_chart 
+```
+
+```{python}
+#| label: fig-penguin-body-mass
+#| fig-cap: "Body Mass of penguins by species."
+# Body mass by species
+mass_chart = alt.Chart(train_data).mark_boxplot().encode(
+    y=alt.Y("species:N", title="Penguin Species"),
+    x=alt.X("body_mass_g:Q", title="Body Mass (g)"),
+    color=alt.Color("species:N", title="Species")
+).properties(
+    title="Body Mass by Penguin Species"
+)
+mass_chart
+```
 
 ## Model Training
 
