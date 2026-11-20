@@ -156,9 +156,130 @@ mass_model = make_pipeline(
 
 mass_model.fit(X_train_mass, y_train)
 ```
-## Mondel Evaluation
 
-# Result
+## Model Evaluation
+
+# Results
+
+To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were 
+evaluated on the held-out test set ($n = 86$). Table 1 compares the overall test accuracy alongside macro averaged precision, 
+recall, and F1-score for each single-predictor model.
+
+```{python}
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix,
+)
+
+# Generate test-set predictions using Jade's fitted pipelines
+y_pred_flipper = flipper_model.predict(X_test_flipper)
+y_pred_mass = mass_model.predict(X_test_mass)
+
+# Build clean summary comparison table
+results_table = pd.DataFrame({
+    "Predictor": ["Flipper Length", "Body Mass"],
+    "Overall Accuracy": [
+        round(accuracy_score(y_test, y_pred_flipper), 3),
+        round(accuracy_score(y_test, y_pred_mass), 3),
+    ],
+    "Macro Precision": [
+        round(precision_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(precision_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+    "Macro Recall": [
+        round(recall_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(recall_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+    "Macro F1-Score": [
+        round(f1_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(f1_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+})
+
+results_table.style.hide(axis="index").format({
+    "Overall Accuracy": "{:.3f}",
+    "Macro Precision": "{:.3f}",
+    "Macro Recall": "{:.3f}",
+    "Macro F1-Score": "{:.3f}",
+})
+```
+
+Table 1. Held-out test set classification performance comparing single-predictor logistic regression models using flipper 
+length versus body mass across overall accuracy and macro averaged precision, recall, and F1-score.
+
+As shown in Table 1, flipper length outperformed body mass across every evaluation metric. 
+The flipper length classifier achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715, 
+compared to an overall accuracy of 0.744 and a macro-averaged F1-score of 0.561 for the body mass classifier.
+
+```{python}
+species_order = ["Adelie", "Chinstrap", "Gentoo"]
+
+def build_cm_df(y_true, y_pred, model_label):
+    cm = confusion_matrix(y_true, y_pred, labels=species_order)
+    rows = []
+    for i, actual in enumerate(species_order):
+        for j, predicted in enumerate(species_order):
+            rows.append({
+                "Model": model_label,
+                "Actual Species": actual,
+                "Predicted Species": predicted,
+                "Count": int(cm[i, j]),
+            })
+    return pd.DataFrame(rows)
+
+cm_combined = pd.concat([
+    build_cm_df(y_test, y_pred_flipper, "Flipper Length Model"),
+    build_cm_df(y_test, y_pred_mass, "Body Mass Model"),
+], ignore_index=True)
+
+base = alt.Chart(cm_combined).encode(
+    x=alt.X("Predicted Species:N", sort=species_order, title="Predicted Species"),
+    y=alt.Y("Actual Species:N", sort=species_order, title="Actual Species"),
+)
+
+heatmap = base.mark_rect().encode(
+    color=alt.Color("Count:Q", scale=alt.Scale(scheme="blues"), title="Penguin Count")
+)
+
+text = base.mark_text(fontSize=13, fontWeight="bold").encode(
+    text="Count:Q",
+    color=alt.condition(
+        alt.datum.Count > 15,
+        alt.value("white"),
+        alt.value("black"),
+    ),
+)
+
+cm_chart = (heatmap + text).properties(
+    width=220,
+    height=220,
+).facet(
+    column=alt.Column(
+        "Model:N",
+        sort=["Flipper Length Model", "Body Mass Model"],
+        title=None,
+        header=alt.Header(labelFontSize=13, labelFontWeight="bold"),
+    )
+).configure_axis(
+    labelFontSize=11,
+    titleFontSize=12,
+)
+
+cm_chart
+```
+
+Figure 3. Side-by-side confusion matrices comparing actual versus predicted penguin species on the held-out test set for 
+the flipper length logistic regression model (left) and the body mass logistic regression model (right).
+
+Figure 3 illustrates how each predictor separates the three penguin species on the test set. Both models reliably identified Gentoo penguins, 
+reflecting their noticeably longer flippers and larger body mass relative to the other two species. 
+However, substantial overlap between Adélie and Chinstrap penguins limited single feature classification performance, 
+with the body mass model misclassifying almost all Chinstrap penguins as Adélie, whereas flipper length provided moderately stronger 
+separation between those two smaller species.
+
 
 # Discussion
 
