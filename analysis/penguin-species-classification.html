@@ -2231,6 +2231,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
   <li><a href="#relevance" id="toc-relevance" class="nav-link" data-scroll-target="#relevance">Relevance</a></li>
   <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
   </ul></li>
@@ -2281,7 +2282,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </header>
 
 
-<div id="76d66381" class="cell" data-execution_count="1">
+<div id="81529054" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -2296,8 +2297,12 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p><strong>Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?</strong> ## Background The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus <em>Pygoscelis</em>) nesting on three islands in Antarctica’s Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.</p>
+<p><strong>Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?</strong></p>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus <em>Pygoscelis</em>) nesting on three islands in Antarctica’s Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.</p>
 <p>Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin’s sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.</p>
+</section>
 <section id="relevance" class="level2">
 <h2 class="anchored" data-anchor-id="relevance">Relevance</h2>
 <p>Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin’s current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.</p>
@@ -2319,7 +2324,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).</p>
 <p>We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.</p>
-<div id="c9fce1b5" class="cell" data-execution_count="2">
+<div id="4fd127f7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data directories</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> Path(<span class="st">&quot;../data/raw&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> Path(<span class="st">&quot;../data/processed&quot;</span>)</span>
@@ -2346,7 +2351,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="traing-test-splitting" class="level2">
 <h2 class="anchored" data-anchor-id="traing-test-splitting">Traing-Test Splitting</h2>
 <p>We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.</p>
-<div id="3ac16715" class="cell" data-execution_count="3">
+<div id="188789a1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    data,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
@@ -2368,13 +2373,13 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>We explored the training data to understand how flipper length and body mass vary across the three penguin species. We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.</p>
-<div id="b7f930f7" class="cell" data-execution_count="4">
+<div id="b081af64" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> train_data.groupby(<span class="st">&quot;species&quot;</span>)[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>]</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>].agg([<span class="st">&quot;count&quot;</span>, <span class="st">&quot;mean&quot;</span>, <span class="st">&quot;std&quot;</span>])</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>summary_stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 
 
@@ -2450,27 +2455,27 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>flipper_chart </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-penguin-flipper-length" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="14">
+<div id="fig-penguin-flipper-length" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="23">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-penguin-flipper-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-72d84227268f4ceaab92e9ab3439bc0c.vega-embed {
+#altair-viz-11baeb3d89a0460d97c75060d3058d61.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-d4d45cfa0d9f4a86b784d72605abf421.vega-embed details,
-#altair-viz-d4d45cfa0d9f4a86b784d72605abf421.vega-embed details summary {
+#altair-viz-11baeb3d89a0460d97c75060d3058d61.vega-embed details,
+#altair-viz-11baeb3d89a0460d97c75060d3058d61.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-d4d45cfa0d9f4a86b784d72605abf421"></div>
+<div id="altair-viz-11baeb3d89a0460d97c75060d3058d61"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d4d45cfa0d9f4a86b784d72605abf421") {
-      outputDiv = document.getElementById("altair-viz-d4d45cfa0d9f4a86b784d72605abf421");
+    if (outputDiv.id !== "altair-viz-11baeb3d89a0460d97c75060d3058d61") {
+      outputDiv = document.getElementById("altair-viz-11baeb3d89a0460d97c75060d3058d61");
     }
 
     const paths = {
@@ -2537,27 +2542,27 @@ Figure 1: Flipper Length of penguins by species.
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">&quot;Body Mass by Penguin Species&quot;</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>mass_chart</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-penguin-body-mass" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<div id="fig-penguin-body-mass" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="24">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-penguin-body-mass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-3a6945e41803473b85aec63944c619e0.vega-embed {
+#altair-viz-70fb25b42ea744e7acd9411783c849f6.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-3a6945e41803473b85aec63944c619e0.vega-embed details,
-#altair-viz-3a6945e41803473b85aec63944c619e0.vega-embed details summary {
+#altair-viz-70fb25b42ea744e7acd9411783c849f6.vega-embed details,
+#altair-viz-70fb25b42ea744e7acd9411783c849f6.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-3a6945e41803473b85aec63944c619e0"></div>
+<div id="altair-viz-70fb25b42ea744e7acd9411783c849f6"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3a6945e41803473b85aec63944c619e0") {
-      outputDiv = document.getElementById("altair-viz-3a6945e41803473b85aec63944c619e0");
+    if (outputDiv.id !== "altair-viz-70fb25b42ea744e7acd9411783c849f6") {
+      outputDiv = document.getElementById("altair-viz-70fb25b42ea744e7acd9411783c849f6");
     }
 
     const paths = {
@@ -2623,7 +2628,7 @@ Logistic regression is a classification method that estimates the probability of
 <p>Flipper length model: uses flipper length as the only predictor.</p>
 <p>Body mass model: uses body mass as the only predictor.</p>
 <p>Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.</p>
-<div id="00b86268" class="cell" data-execution_count="7">
+<div id="dbab7fc4" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 1: Flipper length</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flipper_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -2631,7 +2636,7 @@ Logistic regression is a classification method that estimates the probability of
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>flipper_model.fit(X_train_flipper, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <style>.sk-global {
 
 --sklearn-color-text: #000;
@@ -3269,8 +3274,8 @@ a.param-doc-link::before {
   justify-content: center;
   margin-top: 0.5em;
 }
-</style><div id="sk-container-id-3" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),
-                (&#39;logisticregression&#39;, LogisticRegression(max_iter=1000))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-5" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),
+                (&#39;logisticregression&#39;, LogisticRegression(max_iter=1000))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-13" type="checkbox"><label for="sk-estimator-id-13" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3398,7 +3403,7 @@ when fit.<br>
 
             </details>
         </div>
-    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="standardscaler__">
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-14" type="checkbox"><label for="sk-estimator-id-14" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="standardscaler__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3563,7 +3568,7 @@ The variance for each feature in the training set. Used to compute<br>
             </div>
           </details>
         </div>
-    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-9" type="checkbox"><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="logisticregression__">
+    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-15" type="checkbox"><label for="sk-estimator-id-15" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="logisticregression__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -4081,10 +4086,10 @@ function forceTheme(elementId) {
     }
 }
 
-forceTheme('sk-container-id-3');</script>
+forceTheme('sk-container-id-5');</script>
 </div>
 </div>
-<div id="d1675840" class="cell" data-execution_count="8">
+<div id="784f06bf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Body mass</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mass_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -4092,7 +4097,7 @@ forceTheme('sk-container-id-3');</script>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>mass_model.fit(X_train_mass, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <style>.sk-global {
 
 --sklearn-color-text: #000;
@@ -4730,8 +4735,8 @@ a.param-doc-link::before {
   justify-content: center;
   margin-top: 0.5em;
 }
-</style><div id="sk-container-id-4" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),
-                (&#39;logisticregression&#39;, LogisticRegression(max_iter=1000))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-10" type="checkbox"><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-6" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),
+                (&#39;logisticregression&#39;, LogisticRegression(max_iter=1000))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-16" type="checkbox"><label for="sk-estimator-id-16" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -4859,7 +4864,7 @@ when fit.<br>
 
             </details>
         </div>
-    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-11" type="checkbox"><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="standardscaler__">
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-17" type="checkbox"><label for="sk-estimator-id-17" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="standardscaler__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -5024,7 +5029,7 @@ The variance for each feature in the training set. Used to compute<br>
             </div>
           </details>
         </div>
-    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="logisticregression__">
+    <div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-18" type="checkbox"><label for="sk-estimator-id-18" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="logisticregression__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -5542,7 +5547,7 @@ function forceTheme(elementId) {
     }
 }
 
-forceTheme('sk-container-id-2');</script>
+forceTheme('sk-container-id-6');</script>
 </div>
 </div>
 </section>
@@ -5551,7 +5556,7 @@ forceTheme('sk-container-id-2');</script>
 <p>We evaluated both models using accuracy and macro-averaged F1-score on the test set. Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.</p>
 <p>The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.</p>
 <p>We also used confusion matrices to examine which species were correctly classified and which were misclassified.</p>
-<div id="b299a934" class="cell" data-execution_count="9">
+<div id="2d7ebba1" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>flipper_predictions <span class="op">=</span> flipper_model.predict(X_test_flipper)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mass_predictions <span class="op">=</span> mass_model.predict(X_test_mass)</span>
@@ -5565,7 +5570,7 @@ forceTheme('sk-container-id-2');</script>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 
 
