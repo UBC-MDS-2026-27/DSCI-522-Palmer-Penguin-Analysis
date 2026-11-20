@@ -13,6 +13,7 @@ import altair as alt
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import ( accuracy_score, precision_score, recall_score, f1_score, confusion_matrix)
 ```
 # Summary
 
@@ -166,13 +167,6 @@ evaluated on the held-out test set ($n = 86$). Table 1 compares the overall test
 recall, and F1-score for each single-predictor model.
 
 ```{python}
-from sklearn.metrics import (
-    accuracy_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    confusion_matrix,
-)
 
 # Generate test-set predictions using Jade's fitted pipelines
 y_pred_flipper = flipper_model.predict(X_test_flipper)
