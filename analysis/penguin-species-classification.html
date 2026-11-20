@@ -2279,7 +2279,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </header>
 
 
-<div id="00f57258" class="cell" data-execution_count="1">
+<div id="e8340d76" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -2302,7 +2302,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).</p>
 <p>We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.</p>
-<div id="f665a5a8" class="cell" data-execution_count="2">
+<div id="92af49f5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data directories</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> Path(<span class="st">&quot;../data/raw&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> Path(<span class="st">&quot;../data/processed&quot;</span>)</span>
@@ -2329,7 +2329,7 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="traing-test-splitting" class="level2">
 <h2 class="anchored" data-anchor-id="traing-test-splitting">Traing-Test Splitting</h2>
 <p>We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.</p>
-<div id="91f9543f" class="cell" data-execution_count="3">
+<div id="38a991c4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    data,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
@@ -2351,13 +2351,13 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>We explored the training data to understand how flipper length and body mass vary across the three penguin species. We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.</p>
-<div id="4066c218" class="cell" data-execution_count="4">
+<div id="a4ba089f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> train_data.groupby(<span class="st">&quot;species&quot;</span>)[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>]</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>].agg([<span class="st">&quot;count&quot;</span>, <span class="st">&quot;mean&quot;</span>, <span class="st">&quot;std&quot;</span>])</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>summary_stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -2433,27 +2433,27 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>flipper_chart </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-penguin-flipper-length" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="27">
+<div id="fig-penguin-flipper-length" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-penguin-flipper-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-9689d13dbb074b68b831962e29487aa1.vega-embed {
+#altair-viz-860373a2fa3c4a21b13a9ab8fe6881df.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-9689d13dbb074b68b831962e29487aa1.vega-embed details,
-#altair-viz-9689d13dbb074b68b831962e29487aa1.vega-embed details summary {
+#altair-viz-860373a2fa3c4a21b13a9ab8fe6881df.vega-embed details,
+#altair-viz-860373a2fa3c4a21b13a9ab8fe6881df.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-9689d13dbb074b68b831962e29487aa1"></div>
+<div id="altair-viz-860373a2fa3c4a21b13a9ab8fe6881df"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-9689d13dbb074b68b831962e29487aa1") {
-      outputDiv = document.getElementById("altair-viz-9689d13dbb074b68b831962e29487aa1");
+    if (outputDiv.id !== "altair-viz-860373a2fa3c4a21b13a9ab8fe6881df") {
+      outputDiv = document.getElementById("altair-viz-860373a2fa3c4a21b13a9ab8fe6881df");
     }
 
     const paths = {
@@ -2520,27 +2520,27 @@ Figure 1: Flipper Length of penguins by species.
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">&quot;Body Mass by Penguin Species&quot;</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>mass_chart</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-penguin-body-mass" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="28">
+<div id="fig-penguin-body-mass" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-penguin-body-mass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-#altair-viz-2cc9876cc2a64f17909a4cafa48a5418.vega-embed {
+#altair-viz-692a6e3568c145799bd4d7253a7ef185.vega-embed {
 width: 100%;
 display: flex;
 }
-#altair-viz-2cc9876cc2a64f17909a4cafa48a5418.vega-embed details,
-#altair-viz-2cc9876cc2a64f17909a4cafa48a5418.vega-embed details summary {
+#altair-viz-692a6e3568c145799bd4d7253a7ef185.vega-embed details,
+#altair-viz-692a6e3568c145799bd4d7253a7ef185.vega-embed details summary {
 position: relative;
 }
 </style>
-<div id="altair-viz-2cc9876cc2a64f17909a4cafa48a5418"></div>
+<div id="altair-viz-692a6e3568c145799bd4d7253a7ef185"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2cc9876cc2a64f17909a4cafa48a5418") {
-      outputDiv = document.getElementById("altair-viz-2cc9876cc2a64f17909a4cafa48a5418");
+    if (outputDiv.id !== "altair-viz-692a6e3568c145799bd4d7253a7ef185") {
+      outputDiv = document.getElementById("altair-viz-692a6e3568c145799bd4d7253a7ef185");
     }
 
     const paths = {
