@@ -14,7 +14,7 @@ import altair as alt
 # Summary
 
 # Introduction
-The Palmer Penguins dataset (Horst et al., ...) contains data collected from three species of *Pygoscelis* penguins that live in Antartica's Palmer Archipelago from 2007 to 2009.
+The Palmer Penguins dataset (Horst et al., 2020) contains data orignally collected by Dr. Kristen Gorman and the Palmer Station Antarctica LTER from three species of *Pygoscelis* penguins that live in Antarctica's Palmer Archipelago region. It has become a popular alternative to Anderson's Iris dataset (1936) in particularly statistics and machine learning education due to its practical ecological context and more realistic structure, including missing values, unbalanced classes, and a combination of numeric and categorical variables.
 
 # Methods
 ## Data Collection
