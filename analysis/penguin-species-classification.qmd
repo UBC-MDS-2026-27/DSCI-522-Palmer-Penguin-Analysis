@@ -42,11 +42,11 @@ Every breeding season, researchers identified nests where pairs of adults were p
 
 ## Relevance
 
-Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin's current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.
+Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success (Emmerson et al., 2019) and breeding effort (Chappell et al., 1993), so it reflects a penguin's current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.
 
 ## Data Description
 
-We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2022), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
+We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
 
 - **Species** (Adélie, Chinstrap or Gentoo): the target we classify.
 - **Flipper length**, in millimetres.
@@ -337,7 +337,13 @@ Future analyses could extend this work in three practical directions. First, fit
 
 Bels, V., Le Floch, G., Kirchhoff, F., Rivain, M., Leroy, L., Vallianos, N., Comis, C., Pelle, E., Pfyffer, J., Agnew, P., & Davenport, J. (2026). Terrestrial Locomotion in Extant Marine Tetrapods with Flippers. *Biology*, *15*(20), 1890. https://doi.org/10.3390/biology15201890
 
-Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). *PLOS ONE*, *9*(3), e90081. https://doi.org/10.1371/journal.pone.0090081
+Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. *Behavioral Ecology and Sociobiology*, *33*(3), 173–182.
+
+Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. *Ecology and Evolution*, *9*(8), 4637–4650. https://doi.org/10.1002/ece3.5067
+
+Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus *Pygoscelis*). *PLOS ONE*, *9*(3), e90081. https://doi.org/10.1371/journal.pone.0090081
+
+Horst, A. M., Hill, A. P., & Gorman, K. B. (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data* (R package version 0.1.0). https://doi.org/10.5281/zenodo.3960218
 
 Horst, A. M., Hill, A. P., & Gorman, K. B. (2022). Palmer Archipelago Penguins Data in the palmerpenguins R Package—An Alternative to Anderson’s Irises. *The R Journal*, *14*(1), 244–254. https://doi.org/10.32614/RJ-2022-020
 
