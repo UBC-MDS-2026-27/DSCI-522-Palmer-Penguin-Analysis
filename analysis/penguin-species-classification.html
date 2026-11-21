@@ -2421,7 +2421,7 @@ window.Quarto = {
 </header>
 
 
-<div id="bfe7dbf1" class="cell" data-execution_count="1">
+<div id="f103ae18" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -2441,6 +2441,7 @@ window.Quarto = {
 </div>
 <section id="summary" class="level1">
 <h1>Summary</h1>
+<p>In this analysis, we ask whether flipper length or body mass more accurately classifies penguin species (Adélie, Chinstrap, or Gentoo). To answer this, we built two classification models using the logistic regression algorithm, each of which independently used one of these body measurements from penguins in the Palmer Archipelago region to predict species. On an unseen test data set, the flipper length model outperformed the body mass model on every metric, with an overall accuracy of 0.837 compared with 0.744, and a macro F1-score of 0.715 compared with 0.561. For both models, macro recall and F1-score were well below overall accuracy, meaning that performance was uneven across species: Gentoo penguins, which are noticeably larger, were easy to identify, while the similarly sized Adélie and Chinstrap penguins were often confused. These results suggest that a stable structural trait such as flipper length captures species differences better than body mass, which varies with a penguin’s condition. As a result, although flipper length is the more informative of the two measurements, we do not believe that either one alone is enough to reliably distinguish all three species. Our analysis is also limited by its small, imbalanced data set (only 68 Chinstrap penguins), collected from a single region over three breeding seasons, so the results may not generalise to other populations or years. Further research combining several measurements, such as bill length and depth, is needed to separate Adélie and Chinstrap penguins more reliably.</p>
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
@@ -2471,7 +2472,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
 <p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).</p>
 <p>We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.</p>
-<div id="351b0892" class="cell" data-execution_count="2">
+<div id="9a681206" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data directories</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> Path(<span class="st">&quot;../data/raw&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> Path(<span class="st">&quot;../data/processed&quot;</span>)</span>
@@ -2498,7 +2499,7 @@ window.Quarto = {
 <section id="traing-test-splitting" class="level2">
 <h2 class="anchored" data-anchor-id="traing-test-splitting">Traing-Test Splitting</h2>
 <p>We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.</p>
-<div id="ca6fadf5" class="cell" data-execution_count="3">
+<div id="69737538" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    data,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
@@ -2522,7 +2523,7 @@ window.Quarto = {
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>We explored the training data to understand how flipper length and body mass vary across the three penguin species. We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.</p>
-<div id="6b3e18a7" class="cell" data-execution_count="4">
+<div id="57588e91" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> train_data.groupby(<span class="st">&quot;species&quot;</span>)[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>]</span>
@@ -2652,7 +2653,7 @@ Logistic regression is a classification method that estimates the probability of
 <p>Flipper length model: uses flipper length as the only predictor.</p>
 <p>Body mass model: uses body mass as the only predictor.</p>
 <p>Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.</p>
-<div id="d4f22f20" class="cell" data-execution_count="7">
+<div id="0f4ea6d2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 1: Flipper length</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flipper_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -2661,7 +2662,7 @@ Logistic regression is a classification method that estimates the probability of
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>flipper_model.fit(X_train_flipper, y_train)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f70a52cf" class="cell" data-execution_count="8">
+<div id="62f871e8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Body mass</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mass_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -2676,7 +2677,7 @@ Logistic regression is a classification method that estimates the probability of
 <p>We evaluated both models using accuracy and macro-averaged F1-score on the test set. Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.</p>
 <p>The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.</p>
 <p>We also used confusion matrices to examine which species were correctly classified and which were misclassified.</p>
-<div id="90b3c4a5" class="cell" data-execution_count="9">
+<div id="765b9ccd" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate test-set predictions using the fitted pipelines</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y_pred_flipper <span class="op">=</span> flipper_model.predict(X_test_flipper)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y_pred_mass <span class="op">=</span> mass_model.predict(X_test_mass)</span>
@@ -2745,7 +2746,7 @@ Logistic regression is a classification method that estimates the probability of
 <section id="results" class="level1">
 <h1>Results</h1>
 <p>To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were evaluated on the held-out test set (<span class="math inline">\(n = 86\)</span>). Table 1 compares the overall test accuracy alongside macro averaged precision, recall, and F1-score for each single-predictor model.</p>
-<div id="5145df85" class="cell" data-execution_count="10">
+<div id="897c8e95" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>results_table.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>).<span class="bu">format</span>({</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
@@ -2756,30 +2757,30 @@ Logistic regression is a classification method that estimates the probability of
 <style type="text/css">
 </style>
 
-<table id="T_e6fcc" class="caption-top table table-sm table-striped small">
+<table id="T_47ecc" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_e6fcc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
-<th id="T_e6fcc_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
-<th id="T_e6fcc_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
-<th id="T_e6fcc_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
-<th id="T_e6fcc_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
+<th id="T_47ecc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
+<th id="T_47ecc_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
+<th id="T_47ecc_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
+<th id="T_47ecc_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
+<th id="T_47ecc_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_e6fcc_row0_col0" class="data row0 col0">Flipper Length</td>
-<td id="T_e6fcc_row0_col1" class="data row0 col1">0.837</td>
-<td id="T_e6fcc_row0_col2" class="data row0 col2">0.910</td>
-<td id="T_e6fcc_row0_col3" class="data row0 col3">0.725</td>
-<td id="T_e6fcc_row0_col4" class="data row0 col4">0.715</td>
+<td id="T_47ecc_row0_col0" class="data row0 col0">Flipper Length</td>
+<td id="T_47ecc_row0_col1" class="data row0 col1">0.837</td>
+<td id="T_47ecc_row0_col2" class="data row0 col2">0.910</td>
+<td id="T_47ecc_row0_col3" class="data row0 col3">0.725</td>
+<td id="T_47ecc_row0_col4" class="data row0 col4">0.715</td>
 </tr>
 <tr class="even">
-<td id="T_e6fcc_row1_col0" class="data row1 col0">Body Mass</td>
-<td id="T_e6fcc_row1_col1" class="data row1 col1">0.744</td>
-<td id="T_e6fcc_row1_col2" class="data row1 col2">0.525</td>
-<td id="T_e6fcc_row1_col3" class="data row1 col3">0.617</td>
-<td id="T_e6fcc_row1_col4" class="data row1 col4">0.561</td>
+<td id="T_47ecc_row1_col0" class="data row1 col0">Body Mass</td>
+<td id="T_47ecc_row1_col1" class="data row1 col1">0.744</td>
+<td id="T_47ecc_row1_col2" class="data row1 col2">0.525</td>
+<td id="T_47ecc_row1_col3" class="data row1 col3">0.617</td>
+<td id="T_47ecc_row1_col4" class="data row1 col4">0.561</td>
 </tr>
 </tbody>
 </table>
@@ -2787,7 +2788,7 @@ Logistic regression is a classification method that estimates the probability of
 </div>
 <p>Table 1. Held-out test set classification performance comparing single-predictor logistic regression models using flipper length versus body mass across overall accuracy and macro averaged precision, recall, and F1-score.</p>
 <p>As shown in Table 1, flipper length outperformed body mass across every evaluation metric. The flipper length classifier achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715, compared to an overall accuracy of 0.744 and a macro-averaged F1-score of 0.561 for the body mass classifier.</p>
-<div id="d0d8d74c" class="cell" data-execution_count="11">
+<div id="8ea002be" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>species_order <span class="op">=</span> [<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_cm_df(y_true, y_pred, model_label):</span>
