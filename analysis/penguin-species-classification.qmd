@@ -1,0 +1,307 @@
+---
+title: "Penguin Species Classification"
+author: "Yuxue Zhu, Maxine Paredes, Abhishek Sharma, Hephzibah Adeniji"
+date: "2026/11/19"
+jupyter: python3
+---
+
+```{python}
+from pathlib import Path
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import altair as alt
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix,
+)
+# png, so the charts also show in the PDF
+_ = alt.renderers.enable("png", scale_factor=2)
+```
+# Summary
+
+# Introduction
+
+**Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?**
+
+## Background
+The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.
+
+Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin's sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle. 
+
+## Relevance
+Exploring how flipper length and body mass independently relates to penguin species is valuable because the two measurements describe very different kinds of traits. Flipper length is structural: once a penguin is fully grown, it stays roughly constant. In comparison, body mass varies based on factors like foraging success and breeding effort, so it reflects a penguin's current condition as much as its species. Finding out which one better separates the species tells us whether species differences are better captured by stable body structure or by size that fluctuates, which matters for any study that compares penguins measured at different times or under different conditions.
+
+## Data Description
+We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
+
+- `species`: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.
+- `flipper_length_mm`: flipper length, in millimetres.
+- `body_mass_g`: body mass, in grams.
+
+Two penguins have no flipper length or body mass recorded, so we remove them before analysis. The remaining variables are not used.
+
+# Methods
+## Data Collection
+
+We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).
+
+We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.
+
+```{python}
+# Create data directories
+raw_dir = Path("../data/raw")
+processed_dir = Path("../data/processed")
+
+raw_dir.mkdir(parents=True, exist_ok=True)
+processed_dir.mkdir(parents=True, exist_ok=True)
+
+# Download the original dataset
+url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv"
+raw_data = pd.read_csv(url)
+
+# Save the original dataset
+raw_data.to_csv(raw_dir / "penguins.csv", index=False)
+
+# Select relevant variables and remove missing values
+data = raw_data[
+    ["species", "flipper_length_mm", "body_mass_g"]
+].dropna()
+
+# Save processed data
+data.to_csv(processed_dir / "penguins_cleaned.csv", index=False)
+```
+
+## Traing-Test Splitting
+We divided the cleaned dataset into training and testing sets using a 75:25 ratio. 
+We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.
+
+```{python}
+
+train_data, test_data = train_test_split(
+    data,
+    test_size=0.25,
+    random_state=123,
+    stratify=data["species"]
+)
+
+# Separate response variable and predictors
+y_train = train_data["species"]
+y_test = test_data["species"]
+
+X_train_flipper = train_data[["flipper_length_mm"]]
+X_test_flipper = test_data[["flipper_length_mm"]]
+
+X_train_mass = train_data[["body_mass_g"]]
+X_test_mass = test_data[["body_mass_g"]]
+```
+
+## Exploratory Data Analysis
+
+We explored the training data to understand how flipper length and body mass vary across the three penguin species. 
+We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.
+
+```{python}
+# Descriptive statistics
+summary_stats = train_data.groupby("species")[
+    ["flipper_length_mm", "body_mass_g"]
+].agg(["count", "mean", "std"])
+summary_stats
+```
+
+```{python}
+#| label: fig-penguin-flipper-length
+#| fig-cap: "Flipper Length of penguins by species."
+
+# Visualize measurements by species
+# Flipper length by species
+flipper_chart = alt.Chart(train_data).mark_boxplot().encode(
+    y=alt.Y("species:N", title="Penguin Species"),
+    x=alt.X("flipper_length_mm:Q", title="Flipper Length (mm)"),
+    color=alt.Color("species:N", title="Species")
+).properties(
+    title="Flipper Length by Penguin Species"
+)
+flipper_chart
+```
+
+```{python}
+#| label: fig-penguin-body-mass
+#| fig-cap: "Body Mass of penguins by species."
+# Body mass by species
+mass_chart = alt.Chart(train_data).mark_boxplot().encode(
+    y=alt.Y("species:N", title="Penguin Species"),
+    x=alt.X("body_mass_g:Q", title="Body Mass (g)"),
+    color=alt.Color("species:N", title="Species")
+).properties(
+    title="Body Mass by Penguin Species"
+)
+mass_chart
+```
+
+## Model Training
+We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with  
+Logistic regression is a classification method that estimates the probability of an observation belonging to each class.
+
+To compare the predictive ability of the two measurements, we developed two separate models:
+
+Flipper length model: uses flipper length as the only predictor.
+
+Body mass model: uses body mass as the only predictor.
+
+Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.
+
+
+```{python}
+# Model 1: Flipper length
+flipper_model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1000)
+)
+
+flipper_model.fit(X_train_flipper, y_train)
+```
+```{python}
+# Model 2: Body mass
+mass_model = make_pipeline(
+    StandardScaler(),
+    LogisticRegression(max_iter=1000)
+)
+
+mass_model.fit(X_train_mass, y_train)
+```
+## Model Evaluation
+
+We evaluated both models using accuracy and macro-averaged F1-score on the test set. 
+Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.
+
+The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.
+
+We also used confusion matrices to examine which species were correctly classified and which were misclassified.
+
+```{python}
+
+# Generate test-set predictions using the fitted pipelines
+y_pred_flipper = flipper_model.predict(X_test_flipper)
+y_pred_mass = mass_model.predict(X_test_mass)
+
+# Build clean summary comparison table
+results_table = pd.DataFrame({
+    "Predictor": ["Flipper Length", "Body Mass"],
+    "Overall Accuracy": [
+        round(accuracy_score(y_test, y_pred_flipper), 3),
+        round(accuracy_score(y_test, y_pred_mass), 3),
+    ],
+    "Macro Precision": [
+        round(precision_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(precision_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+    "Macro Recall": [
+        round(recall_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(recall_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+    "Macro F1-Score": [
+        round(f1_score(y_test, y_pred_flipper, average="macro", zero_division=0), 3),
+        round(f1_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
+    ],
+})
+```
+
+# Results
+
+To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were 
+evaluated on the held-out test set ($n = 86$). Table 1 compares the overall test accuracy alongside macro averaged precision, 
+recall, and F1-score for each single-predictor model.
+
+```{python}
+results_table.style.hide(axis="index").format({
+    "Overall Accuracy": "{:.3f}",
+    "Macro Precision": "{:.3f}",
+    "Macro Recall": "{:.3f}",
+    "Macro F1-Score": "{:.3f}",
+})
+```
+
+Table 1. Held-out test set classification performance comparing single-predictor logistic regression models using flipper 
+length versus body mass across overall accuracy and macro averaged precision, recall, and F1-score.
+
+As shown in Table 1, flipper length outperformed body mass across every evaluation metric. 
+The flipper length classifier achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715, 
+compared to an overall accuracy of 0.744 and a macro-averaged F1-score of 0.561 for the body mass classifier.
+
+```{python}
+species_order = ["Adelie", "Chinstrap", "Gentoo"]
+
+def build_cm_df(y_true, y_pred, model_label):
+    cm = confusion_matrix(y_true, y_pred, labels=species_order)
+    rows = []
+    for i, actual in enumerate(species_order):
+        for j, predicted in enumerate(species_order):
+            rows.append({
+                "Model": model_label,
+                "Actual Species": actual,
+                "Predicted Species": predicted,
+                "Count": int(cm[i, j]),
+            })
+    return pd.DataFrame(rows)
+
+cm_combined = pd.concat([
+    build_cm_df(y_test, y_pred_flipper, "Flipper Length Model"),
+    build_cm_df(y_test, y_pred_mass, "Body Mass Model"),
+], ignore_index=True)
+
+base = alt.Chart(cm_combined).encode(
+    x=alt.X("Predicted Species:N", sort=species_order, title="Predicted Species"),
+    y=alt.Y("Actual Species:N", sort=species_order, title="Actual Species"),
+)
+
+heatmap = base.mark_rect().encode(
+    color=alt.Color("Count:Q", scale=alt.Scale(scheme="blues"), title="Penguin Count")
+)
+
+text = base.mark_text(fontSize=13, fontWeight="bold").encode(
+    text="Count:Q",
+    color=alt.condition(
+        alt.datum.Count > 15,
+        alt.value("white"),
+        alt.value("black"),
+    ),
+)
+
+cm_chart = (heatmap + text).properties(
+    width=220,
+    height=220,
+).facet(
+    column=alt.Column(
+        "Model:N",
+        sort=["Flipper Length Model", "Body Mass Model"],
+        title=None,
+        header=alt.Header(labelFontSize=13, labelFontWeight="bold"),
+    )
+).configure_axis(
+    labelFontSize=11,
+    titleFontSize=12,
+)
+
+cm_chart
+```
+
+Figure 3. Side-by-side confusion matrices comparing actual versus predicted penguin species on the held-out test set for 
+the flipper length logistic regression model (left) and the body mass logistic regression model (right).
+
+Figure 3 illustrates how each predictor separates the three penguin species on the test set. Both models reliably identified Gentoo penguins, 
+reflecting their noticeably longer flippers and larger body mass relative to the other two species. 
+However, substantial overlap between Adélie and Chinstrap penguins limited single feature classification performance, 
+with the body mass model misclassifying almost all Chinstrap penguins as Adélie, whereas flipper length provided moderately stronger 
+separation between those two smaller species.
+
+
+# Discussion
+
+# References
+
