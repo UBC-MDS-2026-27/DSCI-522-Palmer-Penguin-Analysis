@@ -4,5 +4,4 @@
 __pycache__/
 .DS_Store
 _site/
-analysis/*.pdf
-analysis/*.html
+.Rhistory
