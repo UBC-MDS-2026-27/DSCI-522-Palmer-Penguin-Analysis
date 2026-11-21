@@ -9,3 +9,36 @@ In this project, we ask whether flipper length or body mass more accurately clas
 
 The final report can be found [here]([GitHub Pages URL]) (HTML), or as a
 [PDF](analysis/penguin-species-classification.pdf).
+
+## Usage
+
+First time running the project, install [uv](https://docs.astral.sh/uv/getting-started/installation/) and
+[Quarto](https://quarto.org/docs/get-started/), then clone this repository and
+move into it:
+
+```bash
+git clone https://github.com/UBC-MDS-2026-27/DSCI-522-Palmer-Penguin-Analysis.git
+cd DSCI-522-Palmer-Penguin-Analysis
+```
+
+Then run the following from the root of this repository to create the virtual
+environment:
+
+```bash
+uv sync
+```
+
+To run the analysis and render the report, run the following from the root of
+this repository:
+
+```bash
+uv run quarto render
+```
+
+Rendering runs the whole analysis from scratch: it downloads the Palmer
+Penguins data again from the `palmerpenguins` repository (so you need an
+internet connection), and overwrites the files in `data/raw/` and
+`data/processed/`. The rendered report is written to
+`analysis/penguin-species-classification.html` and
+`analysis/penguin-species-classification.pdf`, replacing the versions in this
+repository.
