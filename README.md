@@ -7,7 +7,7 @@ In this project, we ask whether flipper length or body mass more accurately clas
 
 ## Report
 
-The final report can be found [here]([GitHub Pages URL]) (HTML), or as a [PDF](analysis/penguin-species-classification.pdf).
+The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-Palmer-Penguin-Analysis/) (HTML), or as a [PDF](analysis/penguin-species-classification.pdf).
 
 ## Usage
 
