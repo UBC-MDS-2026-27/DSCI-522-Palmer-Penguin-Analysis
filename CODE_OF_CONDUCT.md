@@ -88,7 +88,7 @@ Serious incidents may be reported to the course instructor immediately.
 
 All concerns should be taken seriously and handled fairly and respectfully. Retaliation against anyone who raises a concern in good faith is unacceptable.
 
-**Team contact:** yuxuezhu@student.ubc.ca, 
+**Team contact:** yuxuezhu@student.ubc.ca, maxineparedes@gmail.com, abhishek.ubc.ca@gmail.com
 
 ## 6. Our Commitment
 
