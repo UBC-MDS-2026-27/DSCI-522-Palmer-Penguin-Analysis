@@ -89,6 +89,8 @@ train_data, test_data = train_test_split(
     random_state=123,
     stratify=data["species"]
 )
+train_data.to_csv(processed_dir / "penguins_train.csv", index=False)
+test_data.to_csv(processed_dir / "penguins_test.csv", index=False)
 
 # Separate response variable and predictors
 y_train = train_data["species"]
@@ -122,7 +124,7 @@ summary_stats
 # Flipper length by species
 flipper_chart = alt.Chart(train_data).mark_boxplot().encode(
     y=alt.Y("species:N", title="Penguin Species"),
-    x=alt.X("flipper_length_mm:Q", title="Flipper Length (mm)"),
+    x=alt.X("flipper_length_mm:Q", title="Flipper Length (mm)").scale(zero=False),
     color=alt.Color("species:N", title="Species")
 ).properties(
     title="Flipper Length by Penguin Species"
@@ -136,7 +138,7 @@ flipper_chart
 # Body mass by species
 mass_chart = alt.Chart(train_data).mark_boxplot().encode(
     y=alt.Y("species:N", title="Penguin Species"),
-    x=alt.X("body_mass_g:Q", title="Body Mass (g)"),
+    x=alt.X("body_mass_g:Q", title="Body Mass (g)").scale(zero=False),
     color=alt.Color("species:N", title="Species")
 ).properties(
     title="Body Mass by Penguin Species"
