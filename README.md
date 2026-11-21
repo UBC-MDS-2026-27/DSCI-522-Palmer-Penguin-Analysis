@@ -39,7 +39,7 @@ Rendering runs the whole analysis from scratch: it downloads the Palmer Penguins
 - Python and packages listed in [`pyproject.toml`](pyproject.toml) (exact
   versions are locked in [`uv.lock`](uv.lock))
 
-  ## AI use statement
+## AI use statement
 
 We used Anthropic's [Claude](https://claude.ai) (Opus 5.5) to help edit the wording of report sections, interpret model evaluation metrics, and troubleshoot Git, uv and Quarto errors. All AI-generated suggestions were reviewed, tested and edited by the authors, who take full responsibility for the content of this repository.
 
@@ -49,8 +49,18 @@ Example prompts:
 - "What metric should we use for classification evaluation, and why?"
 - "I'm running `git fetch --all` but I don't see my partner's branch. Why could this be?"
 
-  ## License
+## License
 
 The Penguin Species Classification report contained herein is licensed under the [LICENSE NAME, e.g. Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License](LICENSE.md). See [the license file](LICENSE.md) for more information. If re-using/re-mixing please provide attribution and link to this webpage. The software code contained within this repository is licensed under the [MIT] license. See [the license file](LICENSE.md) for more information.
 
 The Palmer Penguins data set used in this project is released under the [CC0 1.0 Universal](https://allisonhorst.github.io/palmerpenguins/LICENSE.html) public domain dedication by its creators, Allison Horst, Alison Hill and Kristen Gorman (Horst, Hill, and Gorman 2020).
+
+## References
+
+Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. *Behavioral Ecology and Sociobiology, 33*(3), 173–182.
+
+Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. *Ecology and Evolution, 9*(8), 4637–4650. https://doi.org/10.1002/ece3.5067
+
+Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus *Pygoscelis*). *PLOS ONE, 9*(3), e90081. https://doi.org/10.1371/journal.pone.0090081
+
+Horst, A. M., Hill, A. P., & Gorman, K. B. (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data* (R package version 0.1.0). https://doi.org/10.5281/zenodo.3960218
