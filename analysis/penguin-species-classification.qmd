@@ -146,6 +146,14 @@ mass_chart = alt.Chart(train_data).mark_boxplot().encode(
 mass_chart
 ```
 
+To investigate whether flipper length or body mass is more effective at classifying penguin species, we compared the mean and standard deviation of each feature across the three species.
+
+Gentoo penguins have the longest mean flipper length (217.45 mm) and the highest mean body mass (5100.27 g), making them distinct from the other two species. In contrast, Adélie and Chinstrap penguins have more similar measurements, with mean flipper lengths of 189.77 mm and 196.41 mm, and mean body masses of 3700.44 g and 3745.10 g, respectively.
+
+Flipper length has relatively low within-species variability (SDs ranging from 6.41 to 7.48 mm), while body mass shows greater variability (SDs ranging from 415.03 to 508.32 g). This suggests that flipper length may provide more consistent information for distinguishing species. However, the summary statistics alone cannot determine which feature classifies species more accurately, particularly for Adélie and Chinstrap penguins, whose measurements overlap.
+
+Therefore, we will compare the classification performance of models using flipper length and body mass separately, and evaluate their accuracy to determine which feature better predicts penguin species.
+
 ## Model Training
 We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with  
 Logistic regression is a classification method that estimates the probability of an observation belonging to each class.
@@ -166,8 +174,9 @@ flipper_model = make_pipeline(
     LogisticRegression(max_iter=1000)
 )
 
-flipper_model.fit(X_train_flipper, y_train)
+flipper_model.fit(X_train_flipper, y_train);
 ```
+
 ```{python}
 # Model 2: Body mass
 mass_model = make_pipeline(
@@ -175,7 +184,7 @@ mass_model = make_pipeline(
     LogisticRegression(max_iter=1000)
 )
 
-mass_model.fit(X_train_mass, y_train)
+mass_model.fit(X_train_mass, y_train);
 ```
 ## Model Evaluation
 
@@ -212,6 +221,7 @@ results_table = pd.DataFrame({
         round(f1_score(y_test, y_pred_mass, average="macro", zero_division=0), 3),
     ],
 })
+results_table
 ```
 
 # Results
