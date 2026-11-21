@@ -42,3 +42,26 @@ internet connection), and overwrites the files in `data/raw/` and
 `analysis/penguin-species-classification.html` and
 `analysis/penguin-species-classification.pdf`, replacing the versions in this
 repository.
+
+## Dependencies
+
+- [uv](https://docs.astral.sh/uv/) (version 0.12 or higher)
+- [Quarto](https://quarto.org/docs/get-started/) (version 1.10 or higher)
+- Python and packages listed in [`pyproject.toml`](pyproject.toml) (exact
+  versions are locked in [`uv.lock`](uv.lock))
+
+  ## AI use statement
+
+We used Anthropic's [Claude](https://claude.ai) (Opus 5.5) to help edit the
+wording of report sections, interpret model evaluation metrics, and troubleshoot Git,
+uv and Quarto errors. All AI-generated suggestions were reviewed, tested and
+edited by the authors, who take full responsibility for the content of this
+repository.
+
+Example prompts:
+
+- "Can you give me an outline for how to write an introduction for the Palmer
+  Penguins data set?"
+- "What metric should we use for classification evaluation, and why?"
+- "I'm running `git fetch --all` but I don't see my partner's branch. Why
+  could this be?"
