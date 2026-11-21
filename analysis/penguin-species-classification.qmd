@@ -28,13 +28,15 @@ _ = alt.renderers.enable("png", scale_factor=2)
 
 # Introduction
 
-**Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?**
-
 ## Background
 
-The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.
+The Palmer Penguins dataset (M. Horst et al., 2022) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus *Pygoscelis*) nesting on three islands in Antarctica's Palmer Archipelago: Biscoe, Dream and Torgersen. The data was collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins (Gorman et al., 2014).
 
-Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin's sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.
+Every breeding season, researchers identified nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin's sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.
+
+## Research Question
+
+**Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?**
 
 ## Relevance
 
@@ -42,7 +44,7 @@ Exploring how flipper length and body mass independently relates to penguin spec
 
 ## Data Description
 
-We use the `penguins` data set from the `palmerpenguins` package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
+We use the `penguins` data set from the `palmerpenguins` package (M. Horst et al., 2022), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:
 
 - `species`: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.
 - `flipper_length_mm`: flipper length, in millimetres.
@@ -54,7 +56,7 @@ Two penguins have no flipper length or body mass recorded, so we remove them bef
 
 ## Data Collection
 
-We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).
+We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (M. Horst et al., 2022).
 
 We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.
 
@@ -82,7 +84,7 @@ data = raw_data[
 data.to_csv(processed_dir / "penguins_cleaned.csv", index=False)
 ```
 
-## Traing-Test Splitting
+## Train-Test Splitting
 
 We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.
 
@@ -150,8 +152,7 @@ mass_chart
 
 ## Model Training
 
-We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with\
-Logistic regression is a classification method that estimates the probability of an observation belonging to each class.
+We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with Logistic regression is a classification method that estimates the probability of an observation belonging to one specific category (David W. Hosmer Jr. et al., 2013).
 
 To compare the predictive ability of the two measurements, we developed two separate models:
 
@@ -297,16 +298,24 @@ Figure 3 illustrates how each predictor separates the three penguin species on t
 
 # Discussion
 
-*Pygoscelis adeliae* (Adélie), *Pygoscelis papua* (Gentoo), and *Pygoscelis antarcticus* (Chinstrap) are three species of brush-tailed penguins residing in the Antarctic. Using Palmer Penguin’s dataset \[1\], we considered which trait (flipper length or body mass) is a better predictive feature to classify  a penguin’s species.
+*Pygoscelis adeliae* (Adélie), *Pygoscelis papua* (Gentoo), and *Pygoscelis antarcticus* (Chinstrap) are three species of brush-tailed penguins residing in the Antarctic. Using Palmer Penguin’s dataset (M. Horst et al., 2022), we considered which trait (flipper length or body mass) is a better predictive feature to classify a penguin’s species.
 
-Prior to fitting the model, we expected flipper length to be a better predictor of penguin species. This was because biologically, flippers are more distinct anatomical structures of a penguin that can mark evolutionary ancestry (hence species differentiation), compared to a flexible trait like body mass \[2\]. Also, our exploratory data analysis showed a large overlap in the body mass of Adélie and Chinstrap penguins, and we expected the machine learning model to have a harder time distinguishing between those 2 species.
+Prior to fitting the model, we expected flipper length to be a better predictor of penguin species. This was because biologically, flippers are more distinct anatomical structures of a penguin that can mark evolutionary ancestry (hence species differentiation), compared to a flexible trait like body mass (Bels et al., 2026). Also, our exploratory data analysis showed a large overlap in the body mass of Adélie and Chinstrap penguins, and we expected the machine learning model to have a harder time distinguishing between those 2 species.
 
-Our held-out test set results with logistic regression demonstrate that flipper length is a substantially stronger single predictor of Palmer penguin species than body mass. Flipper length achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715 compared to 0.744 accuracy and a 0.561 macro-averaged F1-score for body mass.  This performance gap aligns with biological differences between structural skeletal traits and pliable physiological traits in the seabirds.  Once adult penguins reach maturity, flipper length typically remains relatively stable across the breeding season, providing a consistent morphological signal across species. By contrast, body mass can fluctuate considerably depending on recent foraging success, fasting during incubation, and parental provisioning duties \[3\] introducing within species variance that blurs decision boundaries in a single-predictor logistic regression model.
+Our held-out test set results with logistic regression demonstrate that flipper length is a substantially stronger single predictor of Palmer penguin species than body mass. Flipper length achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715 compared to 0.744 accuracy and a 0.561 macro-averaged F1-score for body mass. This performance gap aligns with biological differences between structural skeletal traits and pliable physiological traits in the seabirds.  Once adult penguins reach maturity, flipper length typically remains relatively stable across the breeding season, providing a consistent morphological signal across species. By contrast, body mass can fluctuate considerably depending on recent foraging success, fasting during incubation, and parental provisioning duties (Gorman et al., 2014) introducing within species variance that blurs decision boundaries in a single-predictor logistic regression model.
 
-Examining species-level errors reveals why overall accuracy remained below 0.85 for both single-feature classifiers. Gentoo penguins are noticeably larger in both flipper length and body mass than their congeners in the Palmer Archipelago, allowing both models to identify Gentoo individuals with high reliability. However, Adélie and Chinstrap penguins share very similar
+Examining species-level errors reveals why overall accuracy remained below 0.85 for both single-feature classifiers. Gentoo penguins are noticeably larger in both flipper length and body mass than their congeners in the Palmer Archipelago, allowing both models to identify Gentoo individuals with high reliability. However, Adélie and Chinstrap penguins share very similar body mass distributions, causing the body mass classifier to misclassify nearly all test-set Chinstrap penguins as Adélie. While flipper length separated Adélie and Chinstrap penguins moderately better than body mass, a single linear boundary on one morphological feature cannot fully resolve overlapping measurements between these two smaller species.
 
-body mass distributions, causing the body mass classifier to misclassify nearly all test-set Chinstrap penguins as Adélie. While flipper length separated Adélie and Chinstrap penguins moderately better than body mass, a single linear boundary on one morphological feature cannot fully resolve overlapping measurements between these two smaller species.
+Several limitations should be considered when interpreting these findings. First, restricting each logistic regression model to a single predictor ignores complementary morphological trait such as bill length and bill depth that strongly distinguish Chinstrap penguins from Adélie penguins. Second, the dataset exhibits class imbalance across species and spans three breeding seasons across different islands in the Palmer Archipelago (M. Horst et al., 2022) meaning environmental and inter-annual shifts in prey availability could influence body mass measurements. Third, adult penguins exhibit sexual dimorphism in body size (Gorman et al., 2014),and pooling males and females without accounting for sex increases overlap between smaller males of one species and larger females of another. In addition, this classification is strictly machine-learning, and cannot cover the scope of correct taxonomic classification of a species.
 
-Several limitations should be considered when interpreting these findings. First, restricting each logistic regression model to a single predictor ignores complementary morphological trait such as bill length and bill depth that strongly distinguish Chinstrap penguins from Adélie penguins. Second, the dataset exhibits class imbalance across species and spans three breeding seasons across different islands in the Palmer Archipelago \[1\] meaning environmental and inter-annual shifts in prey availability could influence body mass measurements. Third, adult penguins exhibit sexual dimorphism in body size \[3\], and pooling males and females without accounting for sex increases overlap between smaller males of one species and larger females of another. In addition, this classification is strictly machine-learning, and cannot cover the scope of correct taxonomic classification of a species.
+Future analyses could extend this work in three practical directions. First, fitting a multivariable logistic regression model or regularized classifier that combines flipper length with bill length and bill depth would quantify how much classification accuracy improves when structural bill morphology is included alongside flipper length. Second, incorporating penguin sex and nesting island as covariates or interaction terms could clarify whether accounting for sexual dimorphism resolves the remaining confusion between Adélie and Chinstrap penguins. Finally, evaluating non-linear classifiers such as random forests or support vector machines on the multi-feature dataset could test whether curved decision boundaries capture subtle morphological separation across all three species.
 
 # References
+
+Bels, V., Le Floch, G., Kirchhoff, F., Rivain, M., Leroy, L., Vallianos, N., Comis, C., Pelle, E., Pfyffer, J., Agnew, P., & Davenport, J. (2026). Terrestrial Locomotion in Extant Marine Tetrapods with Flippers. *Biology*, *15*(20), 1890. https://doi.org/10.3390/biology15201890
+
+David W. Hosmer Jr., Stanley Lemeshow, & Rodney X. Sturdivant. (2013). Introduction to the Logistic Regression Model. In *Applied Logistic Regression* (pp. 1–33). John Wiley & Sons, Ltd. https://doi.org/10.1002/9781118548387.ch1
+
+Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). *PLOS ONE*, *9*(3), e90081. https://doi.org/10.1371/journal.pone.0090081
+
+M. Horst, A., Presmanes Hill, A., & B. Gorman, K. (2022). Palmer Archipelago Penguins Data in the palmerpenguins R Package—An Alternative to Anderson’s Irises. *The R Journal*, *14*(1), 244–254. https://doi.org/10.32614/RJ-2022-020
