@@ -1,5 +1,5 @@
 # Penguin Species Classification: Flipper Length vs. Body Mass
-**Authors:** Yuxue Zhu, Maxine Paredes, Hephzibah Adeniji, Abhishek Sharma
+**Authors:** Yuxue (Jade) Zhu, Maxine Paredes, Hephzibah Adeniji, Abhishek Sharma
 
 ## About
 
@@ -57,10 +57,14 @@ The Palmer Penguins data set used in this project is released under the [CC0 1.0
 
 ## References
 
-[Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. *Behavioral Ecology and Sociobiology, 33*(3), 173–182.](https://doi.org/10.1007/BF00216598)
+[Bels, V., Le Floch, G., Kirchhoff, F., Rivain, M., Leroy, L., Vallianos, N., Comis, C., Pelle, E., Pfyffer, J., Agnew, P., & Davenport, J. (2026). Terrestrial Locomotion in Extant Marine Tetrapods with Flippers. Biology, 15(20), 1890. https://doi.org/10.3390/biology15201890]
 
-[Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. *Ecology and Evolution, 9*(8), 4637–4650.](https://doi.org/10.1002/ece3.5067)
+[Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. Behavioral Ecology and Sociobiology, 33(3), 173–182.]
 
-[Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus *Pygoscelis*). *PLOS ONE, 9*(3), e90081.](https://doi.org/10.1371/journal.pone.0090081)
+[Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. Ecology and Evolution, 9(8), 4637–4650. https://doi.org/10.1002/ece3.5067]
 
-[Horst, A. M., Hill, A. P., & Gorman, K. B. (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data* (R package version 0.1.0).](https://doi.org/10.5281/zenodo.3960218)
+[Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). PLOS ONE, 9(3), e90081. https://doi.org/10.1371/journal.pone.0090081]
+
+[Horst, A. M., Hill, A. P., & Gorman, K. B. (2022). Palmer Archipelago Penguins Data in the palmerpenguins R Package—An Alternative to Anderson’s Irises. The R Journal, 14(1), 244–254. https://doi.org/10.32614/RJ-2022-020]
+
+[Hosmer, D. W., Jr., Lemeshow, S., & Sturdivant, R. X. (2013). Introduction to the Logistic Regression Model. In Applied Logistic Regression (3rd ed., pp. 1–33). John Wiley & Sons. https://doi.org/10.1002/9781118548387.ch1]
