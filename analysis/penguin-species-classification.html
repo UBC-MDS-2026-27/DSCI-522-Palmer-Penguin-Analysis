@@ -2371,13 +2371,14 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
   <li><a href="#relevance" id="toc-relevance" class="nav-link" data-scroll-target="#relevance">Relevance</a></li>
   <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
   <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection">Data Collection</a></li>
-  <li><a href="#traing-test-splitting" id="toc-traing-test-splitting" class="nav-link" data-scroll-target="#traing-test-splitting">Traing-Test Splitting</a></li>
+  <li><a href="#train-test-splitting" id="toc-train-test-splitting" class="nav-link" data-scroll-target="#train-test-splitting">Train-Test Splitting</a></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
   <li><a href="#model-training" id="toc-model-training" class="nav-link" data-scroll-target="#model-training">Model Training</a></li>
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model Evaluation</a></li>
@@ -2421,7 +2422,7 @@ window.Quarto = {
 </header>
 
 
-<div id="a37f6456" class="cell" data-execution_count="1">
+<div id="d92e0893" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -2444,11 +2445,14 @@ window.Quarto = {
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p><strong>Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?</strong></p>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>The Palmer Penguins dataset (Horst et al., 2020) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus <em>Pygoscelis</em>) nesting on three islands in Antarctica’s Palmer Archipelago: Biscoe, Dream and Torgersen. The data were collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins.</p>
-<p>Every breeding season, researchers identified studies nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin’s sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.</p>
+<p>The Palmer Penguins dataset (M. Horst et al., 2022) contains body measurements of adult Adélie, Chinstrap and Gentoo penguins (genus <em>Pygoscelis</em>) nesting on three islands in Antarctica’s Palmer Archipelago: Biscoe, Dream and Torgersen. The data was collected from 2007 to 2009 by Dr. Kristen Gorman and the Palmer Station Antarctica Long Term Ecological Research (LTER) program, as part of a study of differences between male and female penguins (Gorman et al., 2014).</p>
+<p>Every breeding season, researchers identified nests where pairs of adults were present prior to egg-laying and consistently monitored these sites. Once a nest was found to have one egg, both adults were captured, measured, and had a blood sample taken to determine each penguin’s sex (Gorman et al., 2014). Consequently, every observation in the data set represents a breeding adult measured at the same point in the nesting cycle.</p>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p><strong>Does flipper length or body mass more accurately classify penguin species (Adélie, Chinstrap, Gentoo)?</strong></p>
 </section>
 <section id="relevance" class="level2">
 <h2 class="anchored" data-anchor-id="relevance">Relevance</h2>
@@ -2456,7 +2460,7 @@ window.Quarto = {
 </section>
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
-<p>We use the <code>penguins</code> data set from the <code>palmerpenguins</code> package (Horst et al., 2020), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:</p>
+<p>We use the <code>penguins</code> data set from the <code>palmerpenguins</code> package (M. Horst et al., 2022), which contains 344 penguins: 152 Adélie, 68 Chinstrap and 124 Gentoo. Each row represents one adult penguin and records its species, island, bill length, bill depth, flipper length, body mass, sex and study year. Our analysis uses three of these variables:</p>
 <ul>
 <li><code>species</code>: penguin species (Adélie, Chinstrap or Gentoo); the target we classify.</li>
 <li><code>flipper_length_mm</code>: flipper length, in millimetres.</li>
@@ -2469,9 +2473,9 @@ window.Quarto = {
 <h1>Methods</h1>
 <section id="data-collection" class="level2">
 <h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
-<p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (Horst et al., 2020).</p>
+<p>We used the Palmer Penguins dataset, which contains measurements and species information for penguins observed in the Palmer Archipelago, Antarctica. The dataset was obtained from the publicly available GitHub repository maintained by the Palmer Penguins project (M. Horst et al., 2022).</p>
 <p>We focused on three variables: penguin species, flipper length, and body mass. Species was used as the response variable, while flipper length and body mass were evaluated separately as predictors.</p>
-<div id="a50af133" class="cell" data-execution_count="2">
+<div id="fff81a05" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data directories</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> Path(<span class="st">&quot;../data/raw&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>processed_dir <span class="op">=</span> Path(<span class="st">&quot;../data/processed&quot;</span>)</span>
@@ -2495,10 +2499,10 @@ window.Quarto = {
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>data.to_csv(processed_dir <span class="op">/</span> <span class="st">&quot;penguins_cleaned.csv&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="traing-test-splitting" class="level2">
-<h2 class="anchored" data-anchor-id="traing-test-splitting">Traing-Test Splitting</h2>
+<section id="train-test-splitting" class="level2">
+<h2 class="anchored" data-anchor-id="train-test-splitting">Train-Test Splitting</h2>
 <p>We divided the cleaned dataset into training and testing sets using a 75:25 ratio. We performed this split before exploratory data analysis and preprocessing to prevent information from the test set from influencing model development.</p>
-<div id="0d342b8b" class="cell" data-execution_count="3">
+<div id="a7a19d1d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    data,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
@@ -2520,7 +2524,7 @@ window.Quarto = {
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <p>We explored the training data to understand how flipper length and body mass vary across the three penguin species. We calculated descriptive statistics and created boxplots to examine differences between species and identify potential overlap in their measurements.</p>
-<div id="439ccdd1" class="cell" data-execution_count="4">
+<div id="ad004f3b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptive statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span> train_data.groupby(<span class="st">&quot;species&quot;</span>)[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&quot;flipper_length_mm&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>]</span>
@@ -2640,13 +2644,12 @@ Figure 2: Body Mass of penguins by species.
 </section>
 <section id="model-training" class="level2">
 <h2 class="anchored" data-anchor-id="model-training">Model Training</h2>
-<p>We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with<br>
-Logistic regression is a classification method that estimates the probability of an observation belonging to each class.</p>
+<p>We used logistic regression to classify penguins into three species: Adélie, Chinstrap, and Gentoo with Logistic regression is a classification method that estimates the probability of an observation belonging to one specific category (David W. Hosmer Jr. et al., 2013).</p>
 <p>To compare the predictive ability of the two measurements, we developed two separate models:</p>
 <p>Flipper length model: uses flipper length as the only predictor.</p>
 <p>Body mass model: uses body mass as the only predictor.</p>
 <p>Both models used the same training and testing sets. We standardized the predictor variables using StandardScaler within a pipeline. This ensures that the scaling parameters are learned from the training data only.</p>
-<div id="d2ec9971" class="cell" data-execution_count="7">
+<div id="ceeaa5d7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 1: Flipper length</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flipper_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -4107,7 +4110,7 @@ function forceTheme(elementId) {
 forceTheme('sk-container-id-1');</script>
 </div>
 </div>
-<div id="a4bc7aa6" class="cell" data-execution_count="8">
+<div id="af3b011c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model 2: Body mass</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mass_model <span class="op">=</span> make_pipeline(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
@@ -5574,7 +5577,7 @@ forceTheme('sk-container-id-2');</script>
 <p>We evaluated both models using accuracy and macro-averaged F1-score on the test set. Accuracy measures the proportion of correctly classified penguins. However, because the number of observations may differ across species, accuracy alone may not fully represent classification performance.</p>
 <p>The macro-averaged F1-score considers both precision and recall and calculates the average F1-score across all three species, giving each species equal weight. This allows us to assess how well each model performs across the different classes.</p>
 <p>We also used confusion matrices to examine which species were correctly classified and which were misclassified.</p>
-<div id="10593889" class="cell" data-execution_count="9">
+<div id="a94cbd5c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate test-set predictions using the fitted pipelines</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y_pred_flipper <span class="op">=</span> flipper_model.predict(X_test_flipper)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y_pred_mass <span class="op">=</span> mass_model.predict(X_test_mass)</span>
@@ -5605,7 +5608,7 @@ forceTheme('sk-container-id-2');</script>
 <section id="results" class="level1">
 <h1>Results</h1>
 <p>To evaluate whether flipper length or body mass more accurately classifies penguin species, both fitted logistic regression models were evaluated on the held-out test set (<span class="math inline">\(n = 86\)</span>). Table 1 compares the overall test accuracy alongside macro averaged precision, recall, and F1-score for each single-predictor model.</p>
-<div id="990d15c0" class="cell" data-execution_count="10">
+<div id="cf7d9df3" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>results_table.style.hide(axis<span class="op">=</span><span class="st">&quot;index&quot;</span>).<span class="bu">format</span>({</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Overall Accuracy&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Macro Precision&quot;</span>: <span class="st">&quot;</span><span class="sc">{:.3f}</span><span class="st">&quot;</span>,</span>
@@ -5616,30 +5619,30 @@ forceTheme('sk-container-id-2');</script>
 <style type="text/css">
 </style>
 
-<table id="T_0a684" class="caption-top table table-sm table-striped small">
+<table id="T_a7e0f" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_0a684_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
-<th id="T_0a684_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
-<th id="T_0a684_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
-<th id="T_0a684_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
-<th id="T_0a684_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
+<th id="T_a7e0f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Predictor</th>
+<th id="T_a7e0f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Overall Accuracy</th>
+<th id="T_a7e0f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Macro Precision</th>
+<th id="T_a7e0f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Macro Recall</th>
+<th id="T_a7e0f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Macro F1-Score</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_0a684_row0_col0" class="data row0 col0">Flipper Length</td>
-<td id="T_0a684_row0_col1" class="data row0 col1">0.837</td>
-<td id="T_0a684_row0_col2" class="data row0 col2">0.910</td>
-<td id="T_0a684_row0_col3" class="data row0 col3">0.725</td>
-<td id="T_0a684_row0_col4" class="data row0 col4">0.715</td>
+<td id="T_a7e0f_row0_col0" class="data row0 col0">Flipper Length</td>
+<td id="T_a7e0f_row0_col1" class="data row0 col1">0.837</td>
+<td id="T_a7e0f_row0_col2" class="data row0 col2">0.910</td>
+<td id="T_a7e0f_row0_col3" class="data row0 col3">0.725</td>
+<td id="T_a7e0f_row0_col4" class="data row0 col4">0.715</td>
 </tr>
 <tr class="even">
-<td id="T_0a684_row1_col0" class="data row1 col0">Body Mass</td>
-<td id="T_0a684_row1_col1" class="data row1 col1">0.744</td>
-<td id="T_0a684_row1_col2" class="data row1 col2">0.525</td>
-<td id="T_0a684_row1_col3" class="data row1 col3">0.617</td>
-<td id="T_0a684_row1_col4" class="data row1 col4">0.561</td>
+<td id="T_a7e0f_row1_col0" class="data row1 col0">Body Mass</td>
+<td id="T_a7e0f_row1_col1" class="data row1 col1">0.744</td>
+<td id="T_a7e0f_row1_col2" class="data row1 col2">0.525</td>
+<td id="T_a7e0f_row1_col3" class="data row1 col3">0.617</td>
+<td id="T_a7e0f_row1_col4" class="data row1 col4">0.561</td>
 </tr>
 </tbody>
 </table>
@@ -5647,7 +5650,7 @@ forceTheme('sk-container-id-2');</script>
 </div>
 <p>Table 1. Held-out test set classification performance comparing single-predictor logistic regression models using flipper length versus body mass across overall accuracy and macro averaged precision, recall, and F1-score.</p>
 <p>As shown in Table 1, flipper length outperformed body mass across every evaluation metric. The flipper length classifier achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715, compared to an overall accuracy of 0.744 and a macro-averaged F1-score of 0.561 for the body mass classifier.</p>
-<div id="e7768115" class="cell" data-execution_count="11">
+<div id="795cc97f" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>species_order <span class="op">=</span> [<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_cm_df(y_true, y_pred, model_label):</span>
@@ -5715,9 +5718,19 @@ forceTheme('sk-container-id-2');</script>
 </section>
 <section id="discussion" class="level1">
 <h1>Discussion</h1>
+<p><em>Pygoscelis adeliae</em> (Adélie), <em>Pygoscelis papua</em> (Gentoo), and <em>Pygoscelis antarcticus</em> (Chinstrap) are three species of brush-tailed penguins residing in the Antarctic. Using Palmer Penguin’s dataset (M. Horst et al., 2022), we considered which trait (flipper length or body mass) is a better predictive feature to classify a penguin’s species.</p>
+<p>Prior to fitting the model, we expected flipper length to be a better predictor of penguin species. This was because biologically, flippers are more distinct anatomical structures of a penguin that can mark evolutionary ancestry (hence species differentiation), compared to a flexible trait like body mass (Bels et al., 2026). Also, our exploratory data analysis showed a large overlap in the body mass of Adélie and Chinstrap penguins, and we expected the machine learning model to have a harder time distinguishing between those 2 species.</p>
+<p>Our held-out test set results with logistic regression demonstrate that flipper length is a substantially stronger single predictor of Palmer penguin species than body mass. Flipper length achieved an overall test accuracy of 0.837 and a macro-averaged F1-score of 0.715 compared to 0.744 accuracy and a 0.561 macro-averaged F1-score for body mass. This performance gap aligns with biological differences between structural skeletal traits and pliable physiological traits in the seabirds.  Once adult penguins reach maturity, flipper length typically remains relatively stable across the breeding season, providing a consistent morphological signal across species. By contrast, body mass can fluctuate considerably depending on recent foraging success, fasting during incubation, and parental provisioning duties (Gorman et al., 2014) introducing within species variance that blurs decision boundaries in a single-predictor logistic regression model.</p>
+<p>Examining species-level errors reveals why overall accuracy remained below 0.85 for both single-feature classifiers. Gentoo penguins are noticeably larger in both flipper length and body mass than their congeners in the Palmer Archipelago, allowing both models to identify Gentoo individuals with high reliability. However, Adélie and Chinstrap penguins share very similar body mass distributions, causing the body mass classifier to misclassify nearly all test-set Chinstrap penguins as Adélie. While flipper length separated Adélie and Chinstrap penguins moderately better than body mass, a single linear boundary on one morphological feature cannot fully resolve overlapping measurements between these two smaller species.</p>
+<p>Several limitations should be considered when interpreting these findings. First, restricting each logistic regression model to a single predictor ignores complementary morphological trait such as bill length and bill depth that strongly distinguish Chinstrap penguins from Adélie penguins. Second, the dataset exhibits class imbalance across species and spans three breeding seasons across different islands in the Palmer Archipelago (M. Horst et al., 2022) meaning environmental and inter-annual shifts in prey availability could influence body mass measurements. Third, adult penguins exhibit sexual dimorphism in body size (Gorman et al., 2014),and pooling males and females without accounting for sex increases overlap between smaller males of one species and larger females of another. In addition, this classification is strictly machine-learning, and cannot cover the scope of correct taxonomic classification of a species.</p>
+<p>Future analyses could extend this work in three practical directions. First, fitting a multivariable logistic regression model or regularized classifier that combines flipper length with bill length and bill depth would quantify how much classification accuracy improves when structural bill morphology is included alongside flipper length. Second, incorporating penguin sex and nesting island as covariates or interaction terms could clarify whether accounting for sexual dimorphism resolves the remaining confusion between Adélie and Chinstrap penguins. Finally, evaluating non-linear classifiers such as random forests or support vector machines on the multi-feature dataset could test whether curved decision boundaries capture subtle morphological separation across all three species.</p>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
+<p>Bels, V., Le Floch, G., Kirchhoff, F., Rivain, M., Leroy, L., Vallianos, N., Comis, C., Pelle, E., Pfyffer, J., Agnew, P., &amp; Davenport, J. (2026). Terrestrial Locomotion in Extant Marine Tetrapods with Flippers. <em>Biology</em>, <em>15</em>(20), 1890. https://doi.org/10.3390/biology15201890</p>
+<p>David W. Hosmer Jr., Stanley Lemeshow, &amp; Rodney X. Sturdivant. (2013). Introduction to the Logistic Regression Model. In <em>Applied Logistic Regression</em> (pp. 1–33). John Wiley &amp; Sons, Ltd. https://doi.org/10.1002/9781118548387.ch1</p>
+<p>Gorman, K. B., Williams, T. D., &amp; Fraser, W. R. (2014). Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). <em>PLOS ONE</em>, <em>9</em>(3), e90081. https://doi.org/10.1371/journal.pone.0090081</p>
+<p>M. Horst, A., Presmanes Hill, A., &amp; B. Gorman, K. (2022). Palmer Archipelago Penguins Data in the palmerpenguins R Package—An Alternative to Anderson’s Irises. <em>The R Journal</em>, <em>14</em>(1), 244–254. https://doi.org/10.32614/RJ-2022-020</p>
 </section>
 
 </main>
