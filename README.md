@@ -7,7 +7,7 @@ In this project, we ask whether flipper length or body mass more accurately clas
 
 ## Report
 
-The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-Palmer-Penguin-Analysis/) (HTML), or as a [PDF](analysis/penguin-species-classification.pdf).
+The final report can be found [here](https://ubc-mds-2026-27.github.io/DSCI-522-Palmer-Penguin-Analysis/analysis/penguin-species-classification.html) (HTML), or as a [PDF](https://ubc-mds-2026-27.github.io/DSCI-522-Palmer-Penguin-Analysis/analysis/penguin-species-classification.pdf).
 
 ## Usage
 
@@ -57,10 +57,10 @@ The Palmer Penguins data set used in this project is released under the [CC0 1.0
 
 ## References
 
-Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. *Behavioral Ecology and Sociobiology, 33*(3), 173–182.
+[Chappell, M. A., Janes, D. N., Shoemaker, V. H., Bucher, T. L., & Maloney, S. K. (1993). Reproductive effort in Adélie penguins. *Behavioral Ecology and Sociobiology, 33*(3), 173–182.](https://doi.org/10.1007/BF00216598)
 
-Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. *Ecology and Evolution, 9*(8), 4637–4650. https://doi.org/10.1002/ece3.5067
+[Emmerson, L., Walsh, S., & Southwell, C. (2019). Nonbreeder birds at colonies display qualitatively similar seasonal mass change patterns as breeders. *Ecology and Evolution, 9*(8), 4637–4650.](https://doi.org/10.1002/ece3.5067)
 
-Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus *Pygoscelis*). *PLOS ONE, 9*(3), e90081. https://doi.org/10.1371/journal.pone.0090081
+[Gorman, K. B., Williams, T. D., & Fraser, W. R. (2014). Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus *Pygoscelis*). *PLOS ONE, 9*(3), e90081.](https://doi.org/10.1371/journal.pone.0090081)
 
-Horst, A. M., Hill, A. P., & Gorman, K. B. (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data* (R package version 0.1.0). https://doi.org/10.5281/zenodo.3960218
+[Horst, A. M., Hill, A. P., & Gorman, K. B. (2020). *palmerpenguins: Palmer Archipelago (Antarctica) penguin data* (R package version 0.1.0).](https://doi.org/10.5281/zenodo.3960218)
