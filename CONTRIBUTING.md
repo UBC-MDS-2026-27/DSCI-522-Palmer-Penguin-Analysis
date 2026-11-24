@@ -2,6 +2,17 @@
 
 Thank you for your interest in contributing to our project! Whether you are reporting a bug, proposing an analytical improvement, or submitting code and documentation updates, please follow the guidelines below so we can maintain a reproducible and collaborative workflow.
 
+## Development Environment (Docker & Remote SSH)
+
+All development takes place inside our shared Docker container so every contributor works in the same computational environment. Before starting, complete the initial setup in [`README.md`](README.md) (installing Docker Desktop, generating `~/.ssh/id_ed25519`, cloning the repository, and running `docker compose pull`), install either [Positron](https://positron.posit.co/) (Remote SSH built in) or [VS Code](https://code.visualstudio.com/) with the **Remote - SSH** extension, and verify your local Git identity (`git config --global user.name` and `git config --global user.email`).
+
+1. Start the container from the repository root and verify that `analysis-env` is running:
+
+```bash
+docker compose up -d
+docker compose ps
+```
+
 ## How to Report a Bug or Suggest a Change
 1. Check existing issues: Before opening a new issue, search the [Issues](https://github.com/UBC-MDS-2026-27/DSCI-522-Palmer-Penguin-Analysis/issues) tab to ensure the bug or suggestion has not already been reported.
 2. Open a GitHub Issue: Click New issue and provide a clear, descriptive title.
@@ -26,3 +37,4 @@ Contributors may use generative AI tools (such as ChatGPT, Claude, or GitHub Cop
 
 ## Attribution
 The structure and contribution workflow guidelines in this document were adapted from the [Altair Contributing Guide](https://github.com/vega/altair/blob/main/CONTRIBUTING.md) and the [earthaccess Generative AI Policy](https://github.com/nsidc/earthaccess/blob/main/CONTRIBUTING.md), as referenced in the UBC Master of Data Science DSCI 522 course guidelines.
+
