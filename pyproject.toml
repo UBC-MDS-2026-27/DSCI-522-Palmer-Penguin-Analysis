@@ -1,5 +1,7 @@
 [project]
 name = "dsci-522-palmer-penguin-analysis"
+[tool.uv]
+add-bounds = "exact"
 version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
@@ -10,3 +12,4 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "vl-convert-python>=1.9.0.post1",
 ]
+
